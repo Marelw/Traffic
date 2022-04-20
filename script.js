@@ -9,14 +9,42 @@ const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 
 
 //funkar ej
-async function getArea() {
-    const endpoint = `${AREA_URL}?format=json`
-    const response = await fetch(endpoint)
-    const results = response.json()
-    let resultpage = document.getElementById('areas')
-    resultpage.innerText = results.resultpage
-    resultpage.style.visibility = 'visible'
+// async function getArea() {
+//     const endpoint = `${AREA_URL}?format=json`
+//     const response = await fetch(endpoint)
+//     const results = response.json()
+//     let resultpage = document.getElementById('areas')
+//     resultpage.innerText = results.resultpage
+//     resultpage.style.visibility = 'visible'
+// }
+// //Button funkar
+let areaButton = document.getElementById('areaButton');
+areaButton.addEventListener('click', () => addAreaToElement())
+
+
+function addAreaToElement() {
+    const areas = document.getElementsByClassName("area")
+    fetchJson()
+        .then(area => {
+            areas[0].innerText = area
+        })
+        .catch(error => {
+            areas[0].innerText = error
+        })
 }
-    //Button funkar
-    let areaButton = document.getElementById('areaButton');
-    areaButton.addEventListener('click', () => getArea())
+
+
+async function fetchJson() {
+    const response = await fetch('http://api.sr.se/api/v2/traffic/areas?format=json&page=2')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            const jsonToString = JSON.stringify(data.areas.map(areas => areas.name))
+            console.log('jsonToString', jsonToString)
+
+        })
+    if (!response.ok) {
+        throw new Error("response error")
+    }
+    return console.log(data.areas)
+}
