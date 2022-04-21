@@ -25,6 +25,7 @@ areaButton.addEventListener('click', () => addAreaToElement())
 function addAreaToElement() {
     const areas = document.getElementsByClassName("area")
     fetchJson()
+    fetchMessege()
         .then(area => {
             areas[0].innerText = area
         })
@@ -47,4 +48,23 @@ async function fetchJson() {
         throw new Error("response error")
     }
     return console.log(data.areas)
+}
+
+async function fetchMessege() {
+    const response = await fetch('http://api.sr.se/api/v2/traffic/messages?format=json&page=15')
+        .then(res => res.json())
+        .then(data => {
+            let message = document.getElementById('test')
+            let areaInfo = document.createElement('pre')
+            areaInfo.innerText = JSON.stringify(data)
+            message.appendChild(areaInfo)
+            console.log(data)
+            const messagesToString = JSON.stringify(data)
+            console.log(messagesToString)
+
+        })
+    if (!response.ok) {
+        throw new Error("response error")
+    }
+    // return console.log(data.areas)
 }
