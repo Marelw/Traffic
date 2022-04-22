@@ -18,8 +18,8 @@ async function geoFindMe() {
         const longitude = position.coords.longitude
 
         status.textContent = ''
-        maplink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`
-        maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
+        // maplink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`
+        // maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
         getTrafficArea(latitude, longitude)
         
     }
