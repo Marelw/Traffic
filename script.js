@@ -9,7 +9,7 @@ const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 
 
 let areaButton = document.getElementById('areaButton');
-areaButton.addEventListener('click', () => addAreaToElement())
+areaButton.addEventListener('click', () => locate())
 
 
 function addAreaToElement() {
@@ -62,9 +62,48 @@ async function fetchJson() {
 //     }
 //      return console.log(data.areas)
 // }
+async function locate() {
+    const status = document.querySelector('#status')
+    const maplink = document.querySelector('#map-link')
+    maplink.href = ''
+    maplink.textContent = ''
+
+    async function findMe(position) {
+        const latitude = position.coords.latitude
+        const longitude = position.coords.longitude
+        status.textContent = ''
+        maplink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`
+        maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
+        getTrafficAreaTest(latitude, longitude)
+    }
+
+    async function error() {
+        status.textContent = 'Unable to retreave location'
+    }
+    if (!navigator.geolocation) {
+        status.textContent = 'Geolocation not suported'
+    } else {
+        status.textContent = 'Loading...'
+        navigator.geolocation.getCurrentPosition(findMe, error)
+    }
+
+}
+
+async function getTrafficAreaTest(latitude, longitude) {
+    const response = await fetch(`${AREA_URL}?format=json&latitude=${latitude}&longitude=${longitude}`)
+    const data = await response.json()
+        //console.log(data)
+    let parent = document.getElementById('test')
+    data.areas(area => printArea(parent, area))
+
+}
+
+function printArea(parent, area) {
+    const
+}
 
 async function getMesseges() {
-    const response = await fetch('http://api.sr.se/api/v2/traffic/messages?format=json&page=2&size=15')
+    const response = await fetch('http://api.sr.se/api/v2/traffic/messages?format=json&trafficareaname=Göteborg&size=15')
     const data = await response.json()
         //console.log(data)
 
@@ -81,9 +120,9 @@ function printMessage(parent, message) {
         //messageElement.innerText = message.description
 
     //console.log(message)
-    for (i in message) {
-        console.log(i + "-" + (message[i])) //printar till console.log
-    }
+    // for (i in message) {
+    //     console.log(i + "-" + (message[i])) //printar till console.log
+    // }
     //printar till index.html
     parent.appendChild(messageElement)
 }
