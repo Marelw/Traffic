@@ -7,6 +7,11 @@
     <title>Document</title>
     <script defer src="script.js"></script>
     <style>
+        div {
+            display: flex;
+            flex-direction: column;
+        }
+
         .messageContainer {
             border: 1px solid black;
             margin: 2px;
@@ -21,21 +26,25 @@
 </head>
 
 <body>
-    <form name="formid">
-        <select name="locations" onchange="getMessagesThroughDropDownMenu()">
-            <option>Välj område</option>
-            <option value="goteborg">Göteborg</option>
-            <option value="malmo">Malmö</option>
-            <option value="stockholm">Stockholm</option>
-        </select><br><br>
-    </form>
-    <label id="locations2"></label>
+    <div>
+        <h1>Trafikmeddelanden</h1>
+        <form name="formid">
+            <select name="locations" onchange="getMessagesThroughDropDownMenu()">
+                <option>Välj område</option>
+                <option value="goteborg">Göteborg</option>
+                <option value="malmo">Malmö</option>
+                <option value="stockholm">Stockholm</option>
+            </select><br><br>
+        </form>
+        <label id="locations2"></label>
+    </div>
+    <div>
+        <button id="areaButton">Klicka här för trafikmeddelanden för din nuvarande position</button>
+        <a id="map-link" target="_blank"></a>
 
-    <button id="areaButton">Klicka här för trafikmeddelanden för din nuvarande position</button>
-    <a id="map-link" target="_blank"></a>
-
-    <div id="test"></div>
-    <p id="status"></p>
+        <div id="test"></div>
+        <p id="status"></p>
+    </div>
 </body>
 
 </html>
