@@ -1,16 +1,8 @@
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 
-//För att få fram json format
-"http://api.sr.se/api/v2/traffic/areas?format=json"
-
-//för att få fram json format, sida 2
-"http://api.sr.se/api/v2/traffic/areas?format=json&page=2"
-
-
 let areaButton = document.getElementById('areaButton');
 areaButton.addEventListener('click', () => locate())
-
 
 function addAreaToElement() {
     const areas = document.getElementsByClassName("area")
@@ -24,15 +16,11 @@ function addAreaToElement() {
         })
 }
 
-
 async function fetchJson() {
     const response = await fetch('http://api.sr.se/api/v2/traffic/areas?format=json&page=2')
         .then(res => res.json())
         .then(data => {
-            //console.log(data)
             const jsonToString = JSON.stringify(data.areas.map(areas => areas.name))
-            //console.log('jsonToString', jsonToString)
-
         })
     if (!response.ok) {
         throw new Error("response error")
@@ -40,28 +28,6 @@ async function fetchJson() {
     return console.log(data.areas)
 }
 
-// async function fetchMessege() {
-//     const response = await fetch('http://api.sr.se/api/v2/traffic/messages?format=json&page=2&size=15')
-//         .then(res => res.json())
-//         .then(data => {
-//             let message = document.getElementById('test')
-//             let areaInfo = document.createElement('pre')
-//                 console.log(data)
-//             let arr = Object.entries(data.messages)
-//                 console.log(arr)
-
-//             areaInfo.innerText = JSON.stringify(data)
-//             message.appendChild(areaInfo)
-//                 console.log(data)
-//             const messagesToString = JSON.stringify(data)
-//                 console.log(messagesToString)
-
-//         })
-//     if (!response.ok) {
-//         throw new Error("response error")
-//     }
-//      return console.log(data.areas)
-// }
 async function locate() {
     const status = document.querySelector('#status')
     const maplink = document.querySelector('#map-link')
@@ -73,7 +39,6 @@ async function locate() {
         const longitude = position.coords.longitude
         status.textContent = ''
         maplink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`
-        // maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
         getTrafficAreaTest(latitude, longitude)
     }
 
@@ -92,7 +57,6 @@ async function locate() {
 async function getTrafficAreaTest(latitude, longitude) {
     const response = await fetch(`${AREA_URL}?format=json&latitude=${latitude}&longitude=${longitude}`)
     const data = await response.json()
-    //console.log(data)
     let area = document.getElementById('test')
     let areainfo = document.createElement('div')
     areainfo.innerText = JSON.stringify('Du befinner dig i: ' + data.area.name)
@@ -101,8 +65,6 @@ async function getTrafficAreaTest(latitude, longitude) {
     let areaName = data.area.name
 
     getMessages(areaName)
-    //printArea(parent, area)
-
 }
 
 function printArea(parent, area) {
@@ -115,8 +77,6 @@ function printArea(parent, area) {
 async function getMessages(areaName) {
     const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=5`)
     const data = await response.json()
-    //console.log(data.id)
-
 
     let parent = document.getElementById('test')
     data.messages.forEach(message => printMessage(parent, message))
@@ -138,17 +98,6 @@ function printMessage(parent, message) {
     appendTextDiv(messageElement, description)
     appendTextDiv(messageElement, subcategory)
 
-
-    //messageElement.innerText = JSON.parse(message)
-
-
-    //messageElement.innerText = message.description
-
-    //console.log(message)
-    // for (i in message) {
-    //     console.log(i + "-" + (message[i])) //printar till console.log
-    // }
-    //printar till index.html
     parent.appendChild(messageElement)
 }
 
@@ -158,8 +107,6 @@ function appendTextDiv(parent, text) {
     element.innerText = text
     parent.appendChild(element)
 }
-
-// getMessages()
 
 function getMessagesThroughDropDownMenu() {
     document.getElementById('locations2').innerHTML =
