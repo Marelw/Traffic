@@ -93,17 +93,27 @@ async function getTrafficAreaTest(latitude, longitude) {
     const response = await fetch(`${AREA_URL}?format=json&latitude=${latitude}&longitude=${longitude}`)
     const data = await response.json()
         //console.log(data)
-    let parent = document.getElementById('test')
-    data.areas(area => printArea(parent, area))
+    let area = document.getElementById('test')
+    let areainfo = document.createElement('div')
+    areainfo.innerText = JSON.stringify('Du befinner dig i: ' + data.area.name)
+    area.appendChild(areainfo)
+
+    let areaName = data.area.name
+
+    getMesseges(areaName)
+        //printArea(parent, area)
 
 }
 
 function printArea(parent, area) {
-    const
+    const areaElement = document.createElement('div')
+    areaElement.className = 'areaTester'
+    areaElement.innerText = JSON.stringify(area)
+    parent.appendChild(areaElement)
 }
 
-async function getMesseges() {
-    const response = await fetch('http://api.sr.se/api/v2/traffic/messages?format=json&trafficareaname=Göteborg&size=15')
+async function getMesseges(areaName) {
+    const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=5`)
     const data = await response.json()
         //console.log(data)
 
