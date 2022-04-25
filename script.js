@@ -31,7 +31,7 @@ async function fetchJson() {
         .then(data => {
             //console.log(data)
             const jsonToString = JSON.stringify(data.areas.map(areas => areas.name))
-                //console.log('jsonToString', jsonToString)
+            //console.log('jsonToString', jsonToString)
 
         })
     if (!response.ok) {
@@ -73,7 +73,7 @@ async function locate() {
         const longitude = position.coords.longitude
         status.textContent = ''
         maplink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`
-            // maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
+        // maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
         getTrafficAreaTest(latitude, longitude)
     }
 
@@ -92,7 +92,7 @@ async function locate() {
 async function getTrafficAreaTest(latitude, longitude) {
     const response = await fetch(`${AREA_URL}?format=json&latitude=${latitude}&longitude=${longitude}`)
     const data = await response.json()
-        //console.log(data)
+    //console.log(data)
     let area = document.getElementById('test')
     let areainfo = document.createElement('div')
     areainfo.innerText = JSON.stringify('Du befinner dig i: ' + data.area.name)
@@ -100,8 +100,8 @@ async function getTrafficAreaTest(latitude, longitude) {
 
     let areaName = data.area.name
 
-    getMesseges(areaName)
-        //printArea(parent, area)
+    getMessages(areaName)
+    //printArea(parent, area)
 
 }
 
@@ -112,10 +112,10 @@ function printArea(parent, area) {
     parent.appendChild(areaElement)
 }
 
-async function getMesseges(areaName) {
+async function getMessages(areaName) {
     const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=5`)
     const data = await response.json()
-        //console.log(data.id)
+    //console.log(data.id)
 
 
     let parent = document.getElementById('test')
@@ -158,4 +158,15 @@ function appendTextDiv(parent, text) {
     element.innerText = text
     parent.appendChild(element)
 }
-getMesseges()
+
+// getMessages()
+
+function getMessagesThroughDropDownMenu() {
+    document.getElementById('locations2').innerHTML =
+        ('Valt område:' + formid.locations[formid.locations.selectedIndex].text)
+    areaName = formid.locations[formid.locations.selectedIndex].text
+    if (areaName === 'Malmö') {
+        areaName = 'Malmöhus'
+    }
+    getMessages(areaName)
+}

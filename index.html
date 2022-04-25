@@ -13,7 +13,7 @@
             display: grid;
             grid-template-columns: 200px 1fr;
         }
-        
+
         .messageItem {
             background-color: antiquewhite;
         }
@@ -21,8 +21,17 @@
 </head>
 
 <body>
+    <form name="formid">
+        <select name="locations" onchange="getMessagesThroughDropDownMenu()">
+            <option>Välj område</option>
+            <option value="goteborg">Göteborg</option>
+            <option value="malmo">Malmö</option>
+            <option value="stockholm">Stockholm</option>
+        </select><br><br>
+    </form>
+    <label id="locations2"></label>
 
-    <button id="areaButton">Areas</button>
+    <button id="areaButton">Klicka här för trafikmeddelanden för din nuvarande position</button>
     <a id="map-link" target="_blank"></a>
 
     <div id="test"></div>
