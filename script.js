@@ -73,7 +73,7 @@ async function locate() {
         const longitude = position.coords.longitude
         status.textContent = ''
         maplink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`
-        maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
+            // maplink.textContent = `Latitude: ${latitude} ° , Longitude: ${longitude} °`
         getTrafficAreaTest(latitude, longitude)
     }
 
@@ -115,7 +115,8 @@ function printArea(parent, area) {
 async function getMesseges(areaName) {
     const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=5`)
     const data = await response.json()
-        //console.log(data)
+        //console.log(data.id)
+
 
     let parent = document.getElementById('test')
     data.messages.forEach(message => printMessage(parent, message))
@@ -125,9 +126,23 @@ async function getMesseges(areaName) {
 function printMessage(parent, message) {
     // const { id, priority, createdate, title, exactlocation, description, latitude, longitude, category, subcategory } = data
     const messageElement = document.createElement('div')
-    messageElement.className = "messageItem"
-    messageElement.innerText = JSON.stringify(message)
-        //messageElement.innerText = message.description
+    messageElement.className = "messageContainer"
+
+    let prio = "Prio: " + message.priority
+    let title = "Plats: " + message.title
+    let description = "Beskrivning: " + message.description
+    let subcategory = "Kategori: " + message.subcategory
+
+    appendTextDiv(messageElement, prio)
+    appendTextDiv(messageElement, title)
+    appendTextDiv(messageElement, description)
+    appendTextDiv(messageElement, subcategory)
+
+
+    //messageElement.innerText = JSON.parse(message)
+
+
+    //messageElement.innerText = message.description
 
     //console.log(message)
     // for (i in message) {
@@ -135,5 +150,12 @@ function printMessage(parent, message) {
     // }
     //printar till index.html
     parent.appendChild(messageElement)
+}
+
+function appendTextDiv(parent, text) {
+    const element = document.createElement('div')
+    element.className = "messageItem"
+    element.innerText = text
+    parent.appendChild(element)
 }
 getMesseges()
