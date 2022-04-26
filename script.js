@@ -67,13 +67,6 @@ async function getTrafficAreaTest(latitude, longitude) {
     getMessages(areaName)
 }
 
-function printArea(parent, area) {
-    const areaElement = document.createElement('div')
-    areaElement.className = 'areaTester'
-    areaElement.innerText = JSON.stringify(area)
-    parent.appendChild(areaElement)
-}
-
 async function getMessages(areaName) {
     const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=5`)
     const data = await response.json()
