@@ -11,57 +11,10 @@ const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 let areaButton = document.getElementById('areaButton');
 areaButton.addEventListener('click', () => locate())
 
-
-function addAreaToElement() {
-    const areas = document.getElementsByClassName("area")
-    fetchJson()
-    fetchMessege()
-        .then(area => {
-            areas[0].innerText = area
-        })
-        .catch(error => {
-            areas[0].innerText = error
-        })
-}
+let srAreas = undefined
+let srAreasName = undefined
 
 
-async function fetchJson() {
-    const response = await fetch('http://api.sr.se/api/v2/traffic/areas?format=json&page=2')
-        .then(res => res.json())
-        .then(data => {
-            //console.log(data)
-            const jsonToString = JSON.stringify(data.areas.map(areas => areas.name))
-                //console.log('jsonToString', jsonToString)
-
-        })
-    if (!response.ok) {
-        throw new Error("response error")
-    }
-    return console.log(data.areas)
-}
-
-// async function fetchMessege() {
-//     const response = await fetch('http://api.sr.se/api/v2/traffic/messages?format=json&page=2&size=15')
-//         .then(res => res.json())
-//         .then(data => {
-//             let message = document.getElementById('test')
-//             let areaInfo = document.createElement('pre')
-//                 console.log(data)
-//             let arr = Object.entries(data.messages)
-//                 console.log(arr)
-
-//             areaInfo.innerText = JSON.stringify(data)
-//             message.appendChild(areaInfo)
-//                 console.log(data)
-//             const messagesToString = JSON.stringify(data)
-//                 console.log(messagesToString)
-
-//         })
-//     if (!response.ok) {
-//         throw new Error("response error")
-//     }
-//      return console.log(data.areas)
-// }
 async function locate() {
     const status = document.querySelector('#status')
     const maplink = document.querySelector('#map-link')
@@ -95,8 +48,9 @@ async function getTrafficAreaTest(latitude, longitude) {
         //console.log(data)
     let area = document.getElementById('test')
     let areainfo = document.createElement('div')
-    areainfo.innerText = JSON.stringify('Du befinner dig i: ' + data.area.name)
+    areainfo.innerText = ('Du befinner dig i: ' + data.area.name)
     area.appendChild(areainfo)
+
 
     let areaName = data.area.name
 
@@ -105,19 +59,19 @@ async function getTrafficAreaTest(latitude, longitude) {
 
 }
 
-function printArea(parent, area) {
-    const areaElement = document.createElement('div')
-    areaElement.className = 'areaTester'
-    areaElement.innerText = JSON.stringify(area)
-    parent.appendChild(areaElement)
-}
+// function printArea(parent, area) {
+//     const areaElement = document.createElement('div')
+//     areaElement.className = 'areaTester'
+//     areaElement.innerText = JSON.stringify(area)
+//     parent.appendChild(areaElement)
+// }
 
 async function getMesseges(areaName) {
     const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=5`)
     const data = await response.json()
         //console.log(data.id)
 
-
+    console.log()
     let parent = document.getElementById('test')
     data.messages.forEach(message => printMessage(parent, message))
 
@@ -127,11 +81,16 @@ function printMessage(parent, message) {
     // const { id, priority, createdate, title, exactlocation, description, latitude, longitude, category, subcategory } = data
     const messageElement = document.createElement('div')
     messageElement.className = "messageContainer"
+        //areaElement.className = "areaContiner"
 
     let prio = "Prio: " + message.priority
     let title = "Plats: " + message.title
     let description = "Beskrivning: " + message.description
     let subcategory = "Kategori: " + message.subcategory
+
+    //let name = "Name: " + message.name
+
+    // appendTextDiv(areaElement, name)
 
     appendTextDiv(messageElement, prio)
     appendTextDiv(messageElement, title)
@@ -150,6 +109,7 @@ function printMessage(parent, message) {
     // }
     //printar till index.html
     parent.appendChild(messageElement)
+        //parent.appendChild(areaElement)
 }
 
 function appendTextDiv(parent, text) {
@@ -159,3 +119,48 @@ function appendTextDiv(parent, text) {
     parent.appendChild(element)
 }
 getMesseges()
+
+async function dropdownAreas() {
+    const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
+
+    if (!response.ok) {
+        throw new Error("ooops")
+    }
+
+    const data = await response.json()
+
+    srAreas = data.areas
+
+
+    let parent = document.getElementById('dropdown-content')
+    srAreas.forEach(area => printToDropdown(parent, area))
+
+    // srAreas.forEach(area => {
+    //     //create the div: area.name
+    //     console.log(area.name)
+    // })
+
+
+
+    console.log(srAreas)
+}
+
+function printToDropdown(parent, area) {
+    const areaElement = document.createElement('div')
+    areaElement.className = "areaContainer"
+
+    let name = "Name: " + message.name
+
+    appendAreaDiv(areaElement, name)
+
+    parent.appendChild(areaElement)
+}
+
+function appendAreaDiv(parent, area) {
+    const element = document.createElement('a')
+    element.className = "areaItem"
+    element.innerText = area
+    parent.appendChild(element)
+}
+
+dropdownAreas()
