@@ -109,16 +109,10 @@ async function dropdownAreas() {
 
     srAreas = data.areas
 
-    console.log(srAreas)
+    //console.log(srAreas)
 
     let parent = document.getElementById('dropdown-content-id')
     srAreas.forEach(area => printToDropdown(parent, area))
-
-    // srAreas.forEach(area => {
-    //     //create the div: area.name
-    //     console.log(area.name)
-    // })
-
 
 
 }
@@ -141,7 +135,7 @@ function appendAreaDiv(parent, area) {
     element.id = area
     element.className = "areaItem"
     element.addEventListener("click", () => {
-        console.log(element.id) //if area === area.name function(event)
+        checkAreaChosen(element.id) //if area === area.name function(event)
             //event.target === element
             //checkAreaChosen(element.id)
     });
@@ -150,20 +144,33 @@ function appendAreaDiv(parent, area) {
 }
 
 let quizArray = [
-    { question: 'Hur många heter Glenn i Göteborg?', answer: '454 heter Glenn i Göteborg' },
+    { question: 'Hur många heter Glenn i Göteborg?', answer: '454 personer heter Glenn i Göteborg' },
     { question: 'Vad översätter ordet "bamba" till?', answer: 'Skolmatsal' },
     { question: 'Göteborg liknas ibland vid en annan europeisk storstad med ett "lilla" framför. Vilken storstad?', answer: 'London' }
 ]
 dropdownAreas()
 
-// checkAreaChosen(areaName) {
+ function checkAreaChosen(areaName) {
+   console.log(areaName) 
+ //shuffle array first
+ // is there any left in array?
+ //then pop, take from list
+ // interval question
+    if (areaName === "Göteborg") {
+      let interval = setInterval(() => {
+        //spotta ut random fråga
+        const randomQuestion = Math.floor(Math.random() * quizArray.length)
+        //console.log(randomQuestion, quizArray[randomQuestion])
+        console.log(quizArray[randomQuestion].question)
+        
+      }, 5000)
+      setTimeout(() => {
+        clearInterval(interval)
+      },100000)
 
-//     if (areaName === "Göteborg") {
-//         //spotta ut random fråga
-//         const randomQuestion = Math.floor(Math.random() * months.length)
-//         console.log(randomQuestion, quizArray[randomQuestion])
-//     }
-// }
+
+    }
+}
 
 
 export default {
