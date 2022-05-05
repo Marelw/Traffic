@@ -17,6 +17,8 @@
 
 
 <script>
+//import GetPosition from '../components/GetPosition.vue'
+
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 
@@ -135,7 +137,8 @@ function appendAreaDiv(parent, area) {
     element.id = area
     element.className = "areaItem"
     element.addEventListener("click", () => {
-        checkAreaChosen(element.id) //if area === area.name function(event)
+        //checkAreaChosen(element.id) //if area === area.name function(event)
+        testq(element.id)
             //event.target === element
             //checkAreaChosen(element.id)
     });
@@ -143,38 +146,129 @@ function appendAreaDiv(parent, area) {
     parent.appendChild(element)
 }
 
-let quizArray = [
+let gbgQuizArray = [
     { question: 'Hur många heter Glenn i Göteborg?', answer: '454 personer heter Glenn i Göteborg' },
     { question: 'Vad översätter ordet "bamba" till?', answer: 'Skolmatsal' },
     { question: 'Göteborg liknas ibland vid en annan europeisk storstad med ett "lilla" framför. Vilken storstad?', answer: 'London' }
 ]
 dropdownAreas()
 
- function checkAreaChosen(areaName) {
-   console.log(areaName) 
- //shuffle array first
- // is there any left in array?
- //then pop, take from list
- // interval question
+   //shuffle array first
+   // is there any left in array?
+   //then pop, take from list
+   // interval question
+   const delay = ms => new Promise(res => setTimeout(res, ms))
+
+  async function testq(areaName) {
     if (areaName === "Göteborg") {
-      let interval = setInterval(() => {
-        //spotta ut random fråga
-        const randomQuestion = Math.floor(Math.random() * quizArray.length)
-        //console.log(randomQuestion, quizArray[randomQuestion])
-        console.log(quizArray[randomQuestion].question)
-        
-      }, 5000)
-      setTimeout(() => {
-        clearInterval(interval)
-      },100000)
+      let shuffledArray = gbgQuizArray.sort(() => 0.5 - Math.random())
+      console.log(areaName)
+      
+       for (let i = 0; i <= shuffledArray.length + 1; ++i) {
 
+         if (shuffledArray.length === 0) {
+           console.log("slut")
+         } else {
+           let firstElement = shuffledArray.shift()
+             await delay(2000);
+             console.log(firstElement.question)
+ 
+             await delay(2000);
+             console.log(firstElement.answer);
+         }
 
+       }
     }
+
 }
 
+//  function checkAreaChosen(areaName) {
+//    console.log(areaName) 
+
+
+
+//     if (areaName === "Göteborg") {
+//        let shuffledArray = gbgQuizArray.sort(() => 0.5 - Math.random())
+
+//       for (let i = 0; i <= shuffledArray.length; i++) {
+//         if (shuffledArray.length === 0) {
+//           console.log("slut")
+//         } else if (shuffledArray.length > 0){
+          
+//           let firstElement = shuffledArray.shift()
+//           f1(firstElement.question)
+
+//           function resolveAfter2Seconds(x) {
+//              return new Promise(resolve => {
+//                setTimeout(() => {
+//                  resolve(x);
+//                }, 2000)
+//              })
+//            }
+   
+//            async function f1(question) {
+//              question = await resolveAfter2Seconds(question);
+//              console.log(question)
+   
+//             //  return new Promise(resolve => {
+//               //    setTimeout(() => {
+//                 //      resolve()
+//             //    }, 2000)
+//             //      console.log(firstElement.answer)
+//             //  });
+//            }
+//               f2(firstElement.answer)
+
+//            async function f2(answer) {
+//             answer = await resolveAfter2Seconds(firstElement.answer);
+//              console.log(answer); 
+//            }
+ 
+//         }
+
+//         }
+
+//       // let shuffledArray = gbgQuizArray.sort(() => 0.5 - Math.random())
+
+//       // if (shuffledArray.length === 0) {
+//       //   console.log("du har svarat på allt")
+//       // } else {
+//       //   let firstElement = shuffledArray.shift()
+//       //   console.log(firstElement.question)
+//       // }
+  
+//       // let questionInterval = setInterval(() => {
+
+//       //   //console.log(shuffledArray)
+      
+
+
+//       //   if(shuffledArray.length === 0) {
+//       //     console.log("Du har svarat på alla frågor i Göteborg!")
+//       //     clearInterval(questionInterval)
+//       //   } else {
+//       //     let firstElement = shuffledArray.shift()
+//       //     console.log(firstElement.question)
+//       //   }
+//       //   console.log(firstElement.answer)
+        
+//       // }, 5000)
+//       // setTimeout(() => {
+
+//       //   clearInterval(questionInterval)
+//       // },10000000)
+
+//     }
+// }
+async function givaAnswer() {
+  await checkAreaChosen()
+}
 
 export default {
     name: 'trafikinformation',
+    // components: {
+    //   GetPosition
+    // },
  
     methods: {
           async locate() {
