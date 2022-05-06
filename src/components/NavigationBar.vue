@@ -2,15 +2,15 @@
     <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-light p-4">
             <router-link to="/">
-                <button>Hem</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Hem</button>
             </router-link>
 
             <router-link to="/quizview">
-                <button>Quiz</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Quiz</button>
             </router-link>
 
             <router-link to="/trafficview">
-                <button>Trafikinformation</button>
+                <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Trafikinformation</button>
             </router-link>
         </div>
     </div>
@@ -30,7 +30,6 @@
         </div>
     </nav>
 
-    <button type="button" class="btn btn-primary">Primary</button>
 
 
 </template>
