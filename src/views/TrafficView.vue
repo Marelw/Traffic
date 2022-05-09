@@ -1,15 +1,17 @@
 <template>
     <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose Zone</button>
-      <div id="dropdown-id" class="dropdown-menu"></div>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" >Choose Zone </button>
+        <div id="dropdown-id" class="dropdown-menu"></div>
     </div>
-  
-  
-    <button id="areaButton" type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click.once="locate()">
+
+    <button id="areaButton" type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click="locate()">
         Visa meddelanden
     </button>
     <p id="status"></p>
-    <div id="location"></div>
+    <div id="container">
+        <div id="location"></div>
+
+    </div>
 
     <!-- <div class="card" style="width: 18rem">
         <div class="card-body">
@@ -18,28 +20,22 @@
             <p class="card-text">Marcus har kört i diket.</p>
         </div>
     </div> -->
-
-
-
-
-
 </template>
 
 <script>
-    let srAreas = undefined
 
+let srAreas = undefined
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
-
 
 async function getTrafficAreaTest(latitude, longitude) {
     const response = await fetch(`${AREA_URL}?format=json&latitude=${latitude}&longitude=${longitude}`)
     const data = await response.json()
 
-    let area = document.getElementById("location")
-    let areainfo = document.createElement("div")
-    areainfo.innerText = data.area.name
-    area.appendChild(areainfo)
+    // let area = document.getElementById("location")
+    // let areainfo = document.createElement("div")
+    // areainfo.innerText = data.area.name
+    // area.appendChild(areainfo)
 
     let areaName = data.area.name
 
@@ -49,15 +45,21 @@ async function getMessages(areaName) {
     const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=3`)
     const data = await response.json()
 
-    let parent = document.getElementById("location")
-    data.messages.forEach((message) => printMessage(parent, message))
+        let location = document.getElementById("location")
+        while (location.firstChild) {
+            location.removeChild(location.firstChild);
+        }
+
+        
+        let parent = document.getElementById("location")
+        data.messages.forEach((message) => printMessage(parent, message))
 }
 function printMessage(parent, message) {
-    // const e = document.querySelector("card")
-    // e.parentElement.removeChild(e)
     // const { id, priority, createdate, title, exactlocation, description, latitude, longitude, category, subcategory } = data
-    const messageElement = document.createElement("div")
+    let messageElement = document.createElement("div")
+
     messageElement.className = "card"
+    
 
     let prio = "Prio: " + message.priority
     let title = "Plats: " + message.title
@@ -68,7 +70,6 @@ function printMessage(parent, message) {
     appendMessage(messageElement, description)
     appendCardTitle2(messageElement, title)
     parent.appendChild(messageElement)
-    
 }
 
 function appendCardTitle(parent, subcategory, prio) {
@@ -102,15 +103,13 @@ async function dropdownAreas() {
 
     //console.log(srAreas)
 
-    let parent = document.getElementById('dropdown-id')
-    srAreas.forEach(area => printToDropdown(parent, area))
-
-
+    let parent = document.getElementById("dropdown-id")
+    srAreas.forEach((area) => printToDropdown(parent, area))
 }
 
 // copierad till metod:
 function printToDropdown(parent, area) {
-    const areaElement = document.createElement('div')
+    const areaElement = document.createElement("div")
     areaElement.className = "areaContainer"
 
     let name = area.name
@@ -120,18 +119,24 @@ function printToDropdown(parent, area) {
     parent.appendChild(areaElement)
 }
 
-
 function appendAreaDiv(parent, area) {
-    const element = document.createElement('a')
+    const element = document.createElement("a")
     element.id = area
     element.className = "dropdown-item"
     element.addEventListener("click", () => {
         //checkAreaChosen(element.id) //if area === area.name function(event)
         //testq(element.id)
-            //event.target === element
-            //checkAreaChosen(element.id)
-        getMessages(element.id)
-    });
+        //event.target === element
+        //checkAreaChosen(element.id)
+
+        // let location = document.getElementById("location")
+
+        // while (location.firstChild) {
+        //     location.removeChild(location.firstChild);
+        // }
+  
+         getMessages(element.id)
+    })
     element.innerText = area
     parent.appendChild(element)
 }
@@ -163,7 +168,6 @@ export default {
                 navigator.geolocation.getCurrentPosition(findMe, error)
             }
         },
-        
     },
 }
 </script>
