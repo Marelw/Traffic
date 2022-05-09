@@ -9,7 +9,7 @@
                 <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Quiz</button>
             </router-link>
 
-            <router-link to="/trafficview">
+            <router-link to="/trafficview2">
                 <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" >Trafikinformation</button>
             </router-link>
         </div>
