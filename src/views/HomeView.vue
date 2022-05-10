@@ -13,7 +13,9 @@
                 <router-link to="/trafficview">
                     <button class="btn btn-secondary btn-lg my-2" type="button" style="width: 100%">Trafikinformation</button>
                 </router-link>
-            
+                <router-link to="/aboutview">
+                    <button class="btn btn-secondary btn-lg my-2" type="button" style="width: 100%">Om oss</button>
+                </router-link>
             </div>
 
         </div>
