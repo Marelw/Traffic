@@ -10,7 +10,7 @@
                 <router-link to="/quizview">
                     <button class="btn btn-secondary btn-lg my-2" type="button" style="width: 100%">Quiz</button>
                 </router-link>
-                <router-link to="/trafficview">
+                <router-link to="/trafficview2">
                     <button class="btn btn-secondary btn-lg my-2" type="button" style="width: 100%">Trafikinformation</button>
                 </router-link>
             
