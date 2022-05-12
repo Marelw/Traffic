@@ -94,7 +94,7 @@ export default {
 
             this.yourLocation = data.area.name
             this.dropdownTitle = this.yourLocation
-            // this.getMessages(this.yourLocation)
+            this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
             const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
