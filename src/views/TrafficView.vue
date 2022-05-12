@@ -1,27 +1,14 @@
 <template>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose Zone</button>
-        <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto" >
-            <div v-for="area in trafficZones" ><a class="dropdown-item" @click="chooseZone" >{{ area.name }} </a></div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                data-bs-toggle="dropdown" aria-expanded="false">{{ dropdownTitle }}
+            </button>
+            <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto">
+                <div v-for="area in trafficZones">
+                    <a class="dropdown-item" @click="chooseZone">{{ area.name }} </a>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click="locate">
-        Visa Trafikmeddelanden
-    </button>
-    <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
-    <!-- <div id="container">
-        <div>{{ areaZone }}</div>
-    </div> -->
-
-    <div class="card" style="width: 18rem" v-for="msg in trafficMessages">
-        <div class="card-body">
-            <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
-            <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
-            <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
-        </div>
-    </div>
-
     <!-- Example single danger button -->
     <div class="btn-group">
         <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,6 +24,23 @@
             <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
         </ul>
     </div>
+    <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
+
+    <!-- <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click="locate">
+        Visa Trafikmeddelanden
+    </button> -->
+    <!-- <div id="container">
+        <div>{{ areaZone }}</div>
+    </div> -->
+
+    <div class="card" style="width: 18rem" v-for="msg in trafficMessages">
+        <div class="card-body">
+            <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
+            <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
+            <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
+        </div>
+    </div>
+
 
 
 </template>
@@ -55,7 +59,12 @@ export default {
             yourLocation: "",
             statusMessage: "",
             areaZone: "",
+            dropdownTitle: "Örebro",
         }
+    },
+    mounted() {
+        this.dropdownAreas()
+        this.locate()
     },
     methods: {
         
@@ -84,18 +93,18 @@ export default {
             const data = await response.json()
 
             this.yourLocation = data.area.name
-
-            this.getMessages(this.yourLocation)
+            this.dropdownTitle = this.yourLocation
+            // this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
             const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
             const data = await response.json()
             // let prio = data.messages.priority
+            this.trafficMessages.length = 0
             this.areaZone = this.yourLocation
+            // this.dropdownTitle = this.yourLocation
             
-            //console.log(data.messages)
             data.messages.forEach(message => this.trafficMessages.push(message))
-            console.log(this.trafficMessages)
         },
         async dropdownAreas() {
             const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
@@ -109,6 +118,7 @@ export default {
         chooseZone(event) {
             
             let element = event.target.innerText
+            this.dropdownTitle = element
             this.getMessages(element)
 
                     // while (location.firstChild) {
