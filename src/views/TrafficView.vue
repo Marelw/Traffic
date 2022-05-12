@@ -1,9 +1,24 @@
 <template>
-    <div class="container col-md-12 text-center">
-
+    <div class="container col-md-12 text-center mt-2 mb-3">
         <div class="btn-group">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                data-bs-toggle="dropdown" aria-expanded="false">{{ dropdownTitle }}
+            <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-geo-alt-fill"
+                    viewBox="0 0 16 16"
+                >
+                    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                </svg>
+                {{ dropdownTitle }}
             </button>
             <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto">
                 <div v-for="area in trafficZones">
@@ -13,20 +28,28 @@
         </div>
         <!-- Example single danger button -->
         <div class="btn-group mx-2">
-            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Sortera
-                <svg width="20" height="20" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M4.80842 10.2278C2.59544 7.73487 4.39152 3.83331 7.75213 3.83331H38.2472C41.6078 3.83331 43.4039 7.73486 41.1909 10.2278L30.8227 21.9078V34.4505C30.8227 35.9109 29.9856 37.2459 28.6605 37.899L20.8374 41.7546C18.2367 43.0364 15.1766 41.1723 15.1766 38.3061L15.1766 21.9078L4.80842 10.2278ZM38.2472 7.6889H7.75213L18.1204 19.3689C18.7443 20.0717 19.0882 20.9739 19.0882 21.9078V38.3061L26.9112 34.4505V21.9078C26.9112 20.9739 27.2551 20.0717 27.879 19.3689L38.2472 7.6889Z"
-                        fill="#181818" />
+            <button
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="26"
+                    height="26"
+                    fill="currentColor"
+                    class="bi bi-filter"
+                    viewBox="0 0 16 16"
+                >
                     <path
-                        d="M7.75213 7.6889H38.2472L27.879 19.3689C27.2551 20.0717 26.9112 20.9739 26.9112 21.9078V34.4505L19.0882 38.3061V21.9078C19.0882 20.9739 18.7443 20.0717 18.1204 19.3689L7.75213 7.6889Z"
-                        fill="#181818" />
+                        d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                    />
                 </svg>
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
+                <li><a class="dropdown-item" @click="onlyShowPrioFour">Medel påvärkan</a></li>
                 <!-- <li><hr class="dropdown-divider"></li> -->
                 <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -38,10 +61,12 @@
     </div>
     <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
 
-
     <div class="container">
-        <div class="card mx-auto mb-3 border border-2 border-dark rounded" style="width: 18rem;"
-            v-for="msg in trafficMessages">
+        <div
+            class="card mx-auto mb-3 border border-2 border-dark rounded"
+            style="width: 18rem"
+            v-for="msg in trafficMessages"
+        >
             <div class="card-body">
                 <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
                 <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
@@ -49,9 +74,6 @@
             </div>
         </div>
     </div>
-
-
-
 </template>
 
 <script>
@@ -74,7 +96,6 @@ export default {
         this.locate()
     },
     methods: {
-
         async locate() {
             const findMe = async (position) => {
                 const latitude = position.coords.latitude
@@ -93,7 +114,7 @@ export default {
             }
         },
         async getTrafficAreaTest(latitude, longitude) {
-            const response = await fetch(`${ AREA_URL }?format=json&latitude=${ latitude }&longitude=${ longitude }`)
+            const response = await fetch(`${AREA_URL}?format=json&latitude=${latitude}&longitude=${longitude}`)
             const data = await response.json()
             this.yourLocation = data.area.name
 
@@ -101,7 +122,7 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=4`)
+            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=4`)
 
             const data = await response.json()
             // let prio = data.messages.priority
@@ -110,7 +131,7 @@ export default {
 
             // this.dropdownTitle = this.yourLocation
 
-            data.messages.forEach(message => this.trafficMessages.push(message))
+            data.messages.forEach((message) => this.trafficMessages.push(message))
             console.log(this.trafficMessages)
         },
         async dropdownAreas() {
@@ -120,27 +141,12 @@ export default {
             }
             const data = await response.json()
 
-
-            data.areas.forEach(area => this.trafficZones.push(area))
+            data.areas.forEach((area) => this.trafficZones.push(area))
         },
         chooseZone(event) {
-
             let element = event.target.innerText
             this.dropdownTitle = element
             this.getMessages(element)
-
-            // while (location.firstChild) {
-            //     location.removeChild(location.firstChild);
-            // }
-
-        },
-        chooseZone(event) {
-            let element = event.target.innerText
-            this.getMessages(element)
-            // while (location.firstChild) {
-            //     location.removeChild(location.firstChild);
-            // }
-
         },
         sortOnSerious() {
             let sortedSeriousList = this.trafficMessages
@@ -150,16 +156,15 @@ export default {
             this.trafficMessages = sortedSeriousList
         },
         sortOnMedium() {
-            return this.trafficMessages.filter(messages.priority > 3 && message.priority < 5)
+            let showPrio4 = this.trafficMessages
+            showPrio4.filter((msg) => {
+                return !msg.includes('4')
+            })
+
         },
         sortOnMild() {
             return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
         },
-
-
-
-
     },
 }
-
 </script>
