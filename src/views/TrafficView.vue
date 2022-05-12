@@ -126,12 +126,6 @@ export default {
 
             this.trafficMessages = sortedSeriousList
         },
-        sortOnMedium() {
-            return this.trafficMessages.filter(messages.priority > 3 && message.priority < 5)
-        },
-        sortOnMild() {
-            return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
-        },
 
 
 
