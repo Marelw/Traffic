@@ -43,7 +43,7 @@ export default {
                 ],
                 trafficZones: [],
                 yourLocation: "",
-                timerCount: 10,
+                timerCount: 15,
                 timerEnabled: false,
                 dropdownTitle: "Örebro",
 
@@ -91,6 +91,8 @@ export default {
     
     methods: {
             play() {
+                this.timerEnabled = true;
+
                 if (this.dropdownTitle === "Göteborg") {
                     this.quizGBG()
                 } else if (this.dropdownTitle === "Örebro") {
@@ -98,7 +100,6 @@ export default {
                 } else {
                     console.log("Detta område stöds ej ännu. Donera till CarPlay på Swish: 0720468084")
                 }
-                this.timerEnabled = true;
             },
 
             pause() {
@@ -153,23 +154,21 @@ export default {
         const delay = ms => new Promise(res => setTimeout(res, ms))
 
            let shuffledArray = this.gbgQuizArray.sort(() => 0.5 - Math.random())
-           
-           
-            for (let i = 0; i <= shuffledArray.length + 1; ++i) {
-              if (shuffledArray.length === 0) {
-                console.log("slut")
-              } else {
+            for (let i = 0; i <= shuffledArray.length - 1; ++i) {
+            //   if (shuffledArray.length === 0) {
+            //     console.log("slut")
+            //   } else {
+                this.timerCount = 15
                 let firstElement = shuffledArray.shift()
-                  await delay(10000);
-                  this.timerCount = 10
-                  //console.log(firstElement.question)
-                  this.quizQuestion = firstElement.question
-      
                   await delay(5000);
-                  this.timerCount = 10
-                  //console.log(firstElement.answer);
+                  this.quizQuestion = firstElement.question
+
+                  await delay(5000);
                   this.quizAnswer = firstElement.answer
-              }
+
+                  
+              
+               
             }
        },
 

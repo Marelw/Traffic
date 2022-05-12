@@ -25,16 +25,16 @@
     <!-- Example single danger button -->
     <div class="btn-group">
         <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Filter
+            Sortera
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" @click="sortOnSerious">Allvarlig påverkan</a></li>
-             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
+            <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
+             <!-- <li><hr class="dropdown-divider"></li> -->
+            <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
              <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li>
+            <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
         </ul>
     </div>
 
@@ -94,13 +94,14 @@ export default {
         },
         async getMessages(areaName) {
             this.trafficMessages.length = 0
-            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
+            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=4`)
             const data = await response.json()
             // let prio = data.messages.priority
             this.areaZone = this.yourLocation
             
-            console.log(data.messages)
+            //console.log(data.messages)
             data.messages.forEach(message => this.trafficMessages.push(message))
+            console.log(this.trafficMessages)
         },
         async dropdownAreas() {
             const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
@@ -122,17 +123,22 @@ export default {
 
         },
         sortOnSerious() {
-            return this.trafficMessages.filter(message.priority === 5)
+            let sortedSeriousList = this.trafficMessages
+
+            sortedSeriousList = sortedSeriousList.sort( (a,b) => {
+                return b.priority - a.priority
+
+            })
+
+            this.trafficMessages = sortedSeriousList
         },
         sortOnMedium() {
-            return this.trafficMessages.filter(message.priority > 3 && message.priority < 5)
+            return this.trafficMessages.filter(messages.priority > 3 && message.priority < 5)
         },
         sortOnMild() {
             return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
         },
-        sortOnCategory() {
-            return this.trafficMessages.filter(messages.subcategory === "Vägarbete")
-        }
+
 
 
     },
