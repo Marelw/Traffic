@@ -1,7 +1,7 @@
 <template>
-  <NavigationBar />
-  <router-view></router-view>
-  <Footerbar />
+	<NavigationBar />
+	<router-view class="d-flex flex-column min-vh-100" style="overflow-y: auto; padding-top: 5em;"></router-view>
+	<Footerbar />
 </template>
 
 <script>
@@ -9,10 +9,9 @@ import { RouterLink, RouterView } from "vue-router";
 import NavigationBar from "@/components/NavigationBar.vue"
 import Footerbar from "@/components/FooterBar.vue"
 export default {
-    components: { NavigationBar, Footerbar },
+	components: { NavigationBar, Footerbar },
 }
 </script>
 
 <style>
-
 </style>

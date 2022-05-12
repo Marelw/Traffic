@@ -40,10 +40,6 @@ export default {
             areaZone: "",
         }
     },
-    mounted() {
-        // this.locate()
-        // this.getMessages(this.yourLocation)
-    },
     methods: {
         
 
@@ -73,10 +69,8 @@ export default {
             this.yourLocation = data.area.name
 
             this.getMessages(this.yourLocation)
-            console.log("Here" + this.yourLocation)
         },
         async getMessages(areaName) {
-            console.log(areaName)
             const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
             const data = await response.json()
             
