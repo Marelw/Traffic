@@ -97,7 +97,7 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
+            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=4`)
             const data = await response.json()
             // let prio = data.messages.priority
             this.trafficMessages.length = 0
