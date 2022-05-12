@@ -1,42 +1,46 @@
 <template>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Choose Zone</button>
-        <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto" >
-            <div v-for="area in trafficZones" ><a class="dropdown-item" @click="chooseZone" >{{ area.name }} </a></div>
+<div class="container col-md-12 text-center my-2">
+
+    <div class="btn-group mx-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">Choose Zone</button>
+        <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto">
+            <div v-for="area in trafficZones"><a class="dropdown-item" @click="chooseZone">{{ area.name }} </a></div>
         </div>
     </div>
 
-    <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click="locate">
-        Visa Trafikmeddelanden
-    </button>
-    <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
+    
     <!-- <div id="container">
         <div>{{ areaZone }}</div>
     </div> -->
-
-    <div class="card" style="width: 18rem" v-for="msg in trafficMessages">
-        <div class="card-body">
-            <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
-            <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
-            <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
-        </div>
-    </div>
-
     <!-- Example single danger button -->
-    <div class="btn-group">
+    <div class="btn-group col-sm">
         <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Sortera
+            Sortera på:
         </button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
-             <!-- <li><hr class="dropdown-divider"></li> -->
-            <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
-             <li><hr class="dropdown-divider"></li>
+            <!-- <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
+            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
         </ul>
     </div>
+        </div>
+            <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
+
+    <div class="container">
+        <div class="card mx-auto mb-3 border border-2 border-dark rounded" style="width: 18rem;" v-for="msg in trafficMessages">
+            <div class="card-body">
+                <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
+                <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
+                <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
+            </div>
+        </div>
+    </div>
+
 
 
 </template>
@@ -56,10 +60,11 @@ export default {
         }
     },
     mounted() {
+        this.locate()
         this.dropdownAreas()
     },
     methods: {
-        
+
         async locate() {
             const findMe = async (position) => {
                 const latitude = position.coords.latitude
@@ -84,11 +89,12 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
+            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=5`)
             const data = await response.json()
             // let prio = data.messages.priority
+            this.trafficMessages.length = 0
             this.areaZone = this.yourLocation
-            
+
             //console.log(data.messages)
             data.messages.forEach(message => this.trafficMessages.push(message))
             console.log(this.trafficMessages)
@@ -102,16 +108,16 @@ export default {
             data.areas.forEach(area => this.trafficZones.push(area))
         },
         chooseZone(event) {
-            
+
             let element = event.target.innerText
             this.getMessages(element)
-                    // while (location.firstChild) {
-        //     location.removeChild(location.firstChild);
-        // }
+            // while (location.firstChild) {
+            //     location.removeChild(location.firstChild);
+            // }
         },
         sortOnSerious() {
             let sortedSeriousList = this.trafficMessages
-            sortedSeriousList = sortedSeriousList.sort( (a,b) => {
+            sortedSeriousList = sortedSeriousList.sort((a, b) => {
                 return b.priority - a.priority
             })
             this.trafficMessages = sortedSeriousList
