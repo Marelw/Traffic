@@ -9,7 +9,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <button type="button" class="btn btn-secondary btn-sm btn-block mx-2" @click="locate">Min plats</button> -->
             <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
             <div class="">
                 <button class="btn btn-secondary btn-sm btn-block mx-2" type="button" style="width: 20%"
@@ -19,7 +18,7 @@
             </div>
         </div>
         <div class="card-body">
-            <h5 class="card-title">fråga</h5>
+            <h5 class="card-title">Fråga</h5>
             <p class="card-text">{{ quizQuestion }}</p>
             <!-- v-if="quizAnswer !== ''" -->
             <h6 class="card-title">Svar:</h6>
@@ -73,14 +72,8 @@ export default {
         }
     },
     mounted() {
-        // this.locate()
-        // this.getMessages(this.yourLocation)
         this.dropdownAreas()
         this.locate()
-    },
-    created() {
-        //this.countDownTimer()
-        //this.pause()
     },
 
     methods: {
@@ -148,12 +141,12 @@ export default {
                     let firstElement = shuffledArray.shift()
                     await delay(10000);
                     this.timerCount = 10
-                    //console.log(firstElement.question)
+                    
                     this.quizQuestion = firstElement.question
 
                     await delay(5000);
                     this.timerCount = 10
-                    //console.log(firstElement.answer);
+                    
                     this.quizAnswer = firstElement.answer
                 }
             }
