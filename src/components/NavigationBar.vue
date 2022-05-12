@@ -1,35 +1,44 @@
 <template>
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-light p-4">
+    <nav class="navbar navbar-light bg-secondary">
+        <div class="container">
             <router-link to="/">
-                <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Hem</button>
-            </router-link>
-
-            <router-link to="/quizview">
-                <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Quiz</button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2"><strong>Car Play</strong></button>
             </router-link>
 
             <router-link to="/trafficview">
-                <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" >Trafikinformation</button>
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">
+                    <svg width="26" height="22" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M7.74291 0.722052C8.33868 -0.241832 9.30603 -0.239535 9.90038 0.722052L17.2854 12.6701C18.0807 13.9569 17.5014 15 15.9921 15H1.65119C0.141591 15 -0.439996 13.961 0.357919 12.6701L7.74291 0.722052ZM8.8219 10.2068C9.20008 10.2068 9.50664 9.8966 9.50664 9.52411V5.41159C9.50664 5.03454 9.20271 4.72889 8.8219 4.72889C8.44373 4.72889 8.13716 5.0391 8.13716 5.41159V9.52411C8.13716 9.90116 8.44109 10.2068 8.8219 10.2068ZM8.8219 12.9458C9.20008 12.9458 9.50664 12.6392 9.50664 12.261C9.50664 11.8829 9.20008 11.5763 8.8219 11.5763C8.44373 11.5763 8.13716 11.8829 8.13716 12.261C8.13716 12.6392 8.44373 12.9458 8.8219 12.9458Z"
+                            fill="black" />
+                    </svg>
+                    <div>Trafikinfo</div>
+                </button>
+            </router-link>
+
+            <router-link to="/quizview">
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">
+                    <svg width="17" height="26" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M0.594273 4.3225C0.239273 4.3225 -0.0482262 4.02625 0.0067738 3.67625C0.350524 1.55 1.97052 0 4.78177 0C7.59427 0 9.49052 1.7 9.49052 4.01875C9.49052 5.69875 8.65927 6.87875 7.25302 7.735C5.87802 8.55875 5.48552 9.1325 5.48552 10.2475V10.285C5.48552 10.4508 5.41967 10.6097 5.30246 10.7269C5.18525 10.8442 5.02628 10.91 4.86052 10.91H3.89802C3.73334 10.91 3.57531 10.845 3.45828 10.7292C3.34124 10.6133 3.27467 10.4559 3.27302 10.2912L3.26927 10.0413C3.21552 8.515 3.86552 7.54 5.32552 6.65125C6.61302 5.86125 7.07177 5.2325 7.07177 4.11625C7.07177 2.8925 6.12427 1.99375 4.66427 1.99375C3.40302 1.99375 2.52677 2.655 2.24177 3.74625C2.15927 4.06375 1.89427 4.3225 1.56677 4.3225H0.595523H0.594273ZM4.37052 15C5.14802 15 5.73927 14.4075 5.73927 13.6375C5.73927 12.865 5.14802 12.2725 4.37052 12.2725C3.61302 12.2725 3.01177 12.865 3.01177 13.6363C3.01177 14.4075 3.61302 15 4.37052 15Z"
+                            fill="black" />
+                    </svg>
+                    <div>Quiz</div>
+                </button>
+            </router-link>
+
+            <router-link to="/aboutview">
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">
+                    <svg width="20" height="25" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1.25 15C1.25 15 0 15 0 13.75C0 12.5 1.25 8.75 6.25 8.75C11.25 8.75 12.5 12.5 12.5 13.75C12.5 15 11.25 15 11.25 15H1.25ZM6.25 7.5C7.24456 7.5 8.19839 7.10491 8.90165 6.40165C9.60491 5.69839 10 4.74456 10 3.75C10 2.75544 9.60491 1.80161 8.90165 1.09835C8.19839 0.395088 7.24456 0 6.25 0C5.25544 0 4.30161 0.395088 3.59835 1.09835C2.89509 1.80161 2.5 2.75544 2.5 3.75C2.5 4.74456 2.89509 5.69839 3.59835 6.40165C4.30161 7.10491 5.25544 7.5 6.25 7.5Z"
+                            fill="#181818" />
+                    </svg>
+                    <div>Om</div>
+                </button>
             </router-link>
         </div>
-    </div>
-    <nav class="navbar navbar-light" style="background-color: $orange-200">
-        <div class="container-fluid">
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarToggleExternalContent"
-                aria-controls="navbarToggleExternalContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
     </nav>
-
 
 
 </template>

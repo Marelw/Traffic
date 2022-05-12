@@ -57,11 +57,6 @@ export default {
             areaZone: "",
         }
     },
-    mounted() {
-        // this.locate()
-        // this.getMessages(this.yourLocation)
-        this.dropdownAreas()
-    },
     methods: {
         
 
@@ -93,8 +88,7 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            this.trafficMessages.length = 0
-            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=4`)
+            const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=3`)
             const data = await response.json()
             // let prio = data.messages.priority
             this.areaZone = this.yourLocation
