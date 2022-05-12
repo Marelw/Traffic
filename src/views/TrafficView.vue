@@ -1,5 +1,8 @@
 <template>
-        <div class="dropdown">
+
+    <div class="container col-md-12 text-center">
+        
+        <div class="btn-group">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                 data-bs-toggle="dropdown" aria-expanded="false">{{ dropdownTitle }}
             </button>
@@ -9,35 +12,42 @@
                 </div>
             </div>
         </div>
-    <!-- Example single danger button -->
-    <div class="btn-group">
-        <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            Sortera
-        </button>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
-             <!-- <li><hr class="dropdown-divider"></li> -->
-            <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
-             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
-        </ul>
-    </div>
-    <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
+        <!-- Example single danger button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Sortera
+                <svg width="20" height="20" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.80842 10.2278C2.59544 7.73487 4.39152 3.83331 7.75213 3.83331H38.2472C41.6078 3.83331 43.4039 7.73486 41.1909 10.2278L30.8227 21.9078V34.4505C30.8227 35.9109 29.9856 37.2459 28.6605 37.899L20.8374 41.7546C18.2367 43.0364 15.1766 41.1723 15.1766 38.3061L15.1766 21.9078L4.80842 10.2278ZM38.2472 7.6889H7.75213L18.1204 19.3689C18.7443 20.0717 19.0882 20.9739 19.0882 21.9078V38.3061L26.9112 34.4505V21.9078C26.9112 20.9739 27.2551 20.0717 27.879 19.3689L38.2472 7.6889Z" fill="#181818"/>
+                    <path d="M7.75213 7.6889H38.2472L27.879 19.3689C27.2551 20.0717 26.9112 20.9739 26.9112 21.9078V34.4505L19.0882 38.3061V21.9078C19.0882 20.9739 18.7443 20.0717 18.1204 19.3689L7.75213 7.6889Z" fill="#181818"/>
+                </svg>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
+                <!-- <li><hr class="dropdown-divider"></li> -->
+                <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
+            </ul>
+        </div>
 
+    </div>
+
+    <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
     <!-- <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click="locate">
         Visa Trafikmeddelanden
     </button> -->
     <!-- <div id="container">
         <div>{{ areaZone }}</div>
     </div> -->
-
-    <div class="card" style="width: 18rem" v-for="msg in trafficMessages">
-        <div class="card-body">
-            <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
-            <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
-            <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
+    <div class="container">
+        <div class="card mx-auto mb-3" style="width: 18rem; border: 1px solid black; rounded" v-for="msg in trafficMessages">
+            <div class="card-body ">
+                <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
+                <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
+                <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
+            </div>
         </div>
     </div>
 
