@@ -1,5 +1,5 @@
 <template>
-    <div class="collapse" id="navbarToggleExternalContent">
+    <!-- <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-secondary p-4">
             <router-link to="/">
                 <button type="button" class="btn btn-secondary btn-lg btn-block mx-2">Hem</button>
@@ -32,8 +32,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-    </nav>
+    </nav> -->
 
+    <nav class="navbar navbar-light bg-secondary">
+        <div class="container">
+            <router-link to="/">
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">Car Play</button>
+            </router-link>
+
+            <router-link to="/trafficview">
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">Trafikinfo</button>
+            </router-link>
+
+            <router-link to="/quizview">
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">Quiz</button>
+            </router-link>
+
+            <router-link to="/aboutview">
+                <button type="button" class="btn btn-secondary btn-sm btn-block mx-2">Om</button>
+            </router-link>
+        </div>
+    </nav>
 
 
 </template>

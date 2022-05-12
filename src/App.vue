@@ -1,6 +1,6 @@
 <template>
   <NavigationBar />
-  <router-view></router-view>
+  <router-view class="d-flex flex-column min-vh-100" style="overflow-y: auto; padding-top: 5em;"></router-view>
   <Footerbar />
 </template>
 
