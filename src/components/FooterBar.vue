@@ -1,5 +1,5 @@
 <template>
-    <footer class="position-absolute mt-auto py-3 bg-secondary container-fluid" >
+    <footer class="position-sticky mt-auto py-3 bg-secondary container-fluid" >
     <div class="container" >
         <div>Quiz</div>
         <div>Trafikinfo</div>

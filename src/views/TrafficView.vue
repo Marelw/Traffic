@@ -1,5 +1,6 @@
 <template>
 
+
     <div class="container col-md-12 text-center">
         
         <div class="btn-group">
@@ -33,17 +34,13 @@
         </div>
 
     </div>
+        </div>
+            <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
 
-    <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
-    <!-- <button type="button" class="btn btn-secondary btn-lg btn-block mx-2" @click="locate">
-        Visa Trafikmeddelanden
-    </button> -->
-    <!-- <div id="container">
-        <div>{{ areaZone }}</div>
-    </div> -->
+
     <div class="container">
-        <div class="card mx-auto mb-3" style="width: 18rem; border: 1px solid black; rounded" v-for="msg in trafficMessages">
-            <div class="card-body ">
+        <div class="card mx-auto mb-3 border border-2 border-dark rounded" style="width: 18rem;" v-for="msg in trafficMessages">
+            <div class="card-body">
                 <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
                 <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
                 <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
@@ -56,11 +53,9 @@
 </template>
 
 <script>
-
 let srAreas = undefined
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
-
 export default {
     data() {
         return {
@@ -77,17 +72,14 @@ export default {
         this.locate()
     },
     methods: {
-        
 
         async locate() {
-
             const findMe = async (position) => {
                 const latitude = position.coords.latitude
                 const longitude = position.coords.longitude
                 this.statusMessage = ""
                 this.getTrafficAreaTest(latitude, longitude)
             }
-
             const error = async () => {
                 this.statusMessage = "Unable to retreave location"
             }
@@ -101,20 +93,23 @@ export default {
         async getTrafficAreaTest(latitude, longitude) {
             const response = await fetch(`${ AREA_URL }?format=json&latitude=${ latitude }&longitude=${ longitude }`)
             const data = await response.json()
-
             this.yourLocation = data.area.name
+
             this.dropdownTitle = this.yourLocation
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
             const response = await fetch(`${ MESSAGE_URL }?format=json&trafficareaname=${ areaName }&size=4`)
+
             const data = await response.json()
             // let prio = data.messages.priority
             this.trafficMessages.length = 0
             this.areaZone = this.yourLocation
+
             // this.dropdownTitle = this.yourLocation
             
             data.messages.forEach(message => this.trafficMessages.push(message))
+            console.log(this.trafficMessages)
         },
         async dropdownAreas() {
             const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
@@ -122,6 +117,7 @@ export default {
                 throw new Error("Could not load areas")
             }
             const data = await response.json()
+
 
             data.areas.forEach(area => this.trafficZones.push(area))
         },
@@ -149,6 +145,26 @@ export default {
 
 
 
+
+            let element = event.target.innerText
+            this.getMessages(element)
+            // while (location.firstChild) {
+            //     location.removeChild(location.firstChild);
+            // }
+        },
+        sortOnSerious() {
+            let sortedSeriousList = this.trafficMessages
+            sortedSeriousList = sortedSeriousList.sort((a, b) => {
+                return b.priority - a.priority
+            })
+            this.trafficMessages = sortedSeriousList
+        },
+        sortOnMedium() {
+            return this.trafficMessages.filter(messages.priority > 3 && message.priority < 5)
+        },
+        sortOnMild() {
+            return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
+        },
     },
 }
 </script>
