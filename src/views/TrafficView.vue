@@ -49,7 +49,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
-                <li><a class="dropdown-item" @click="onlyShowPrioFour">Medel påvärkan</a></li>
+                <li><a class="dropdown-item" @click="sortOnMedium">Medel påvärkan</a></li>
                 <!-- <li><hr class="dropdown-divider"></li> -->
                 <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -77,6 +77,7 @@
 </template>
 
 <script>
+// import func from 'vue-editor-bridge'
 let srAreas = undefined
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
@@ -122,7 +123,7 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=4`)
+            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=15`)
 
             const data = await response.json()
             // let prio = data.messages.priority
@@ -132,7 +133,7 @@ export default {
             // this.dropdownTitle = this.yourLocation
 
             data.messages.forEach((message) => this.trafficMessages.push(message))
-            console.log(this.trafficMessages)
+            // console.log(this.trafficMessages)
         },
         async dropdownAreas() {
             const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
@@ -151,16 +152,20 @@ export default {
         sortOnSerious() {
             let sortedSeriousList = this.trafficMessages
             sortedSeriousList = sortedSeriousList.sort((a, b) => {
-                return b.priority - a.priority
+                return a.priority - b.priority
             })
             this.trafficMessages = sortedSeriousList
         },
         sortOnMedium() {
-            let showPrio4 = this.trafficMessages
-            showPrio4.filter((msg) => {
-                return !msg.includes('4')
-            })
+            let filterOnPrio4 = []
+            this.trafficMessages.forEach((msg) => filterOnPrio4.push(msg))
+            console.log(filterOnPrio4)
 
+            let prioFour = filterOnPrio4.filter(function(prio) {
+                return prio.priority === 4 && prio.priority === 3
+            })
+            console.log(prioFour)
+            this.trafficMessages = prioFour
         },
         sortOnMild() {
             return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
