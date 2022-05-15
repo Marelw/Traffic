@@ -164,7 +164,7 @@ h2 {
     top: -1em;
     margin-top: 5em;
     width: 100%;
-    left: 0.75em;
+    left: -0.3em;
     padding-bottom: 4em;
 }
 
