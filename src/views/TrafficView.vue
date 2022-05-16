@@ -74,6 +74,16 @@
             </div>
         </div>
     </div>
+    <!-- <div>
+        <button @click="showModal" ref="btnShow">Open Modal</button>
+        <button @click="toggleModal" ref="btnToggle">Toggle Modal</button>
+
+        <modal id="modal-1">
+            <div class="d-block">Hello From My Modal!</div>
+            <button @click="hideModal">Close Me</button>
+            <button @click="toggleModal">Toggle Me</button>
+        </modal>
+    </div> -->
 </template>
 
 <script>
@@ -82,14 +92,26 @@ let srAreas = undefined
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 export default {
+    //     showModal() {
+    //   this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
+    // },
+    // hideModal() {
+    //   this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
+    // },
+    // toggleModal() {
+    //   this.$root.$emit('bv::toggle::modal', 'modal-1', '#btnToggle')
+    // },
     data() {
         return {
+            checkArray: [],
             trafficMessages: [],
             trafficZones: [],
             yourLocation: "",
             statusMessage: "",
             areaZone: "",
             dropdownTitle: "Örebro",
+            dropdownZone: "",
+            modalShow: false,
         }
     },
     mounted() {
@@ -123,17 +145,16 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=15`)
-
+            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=3`)
+            this.dropdownZone = areaName
             const data = await response.json()
-            // let prio = data.messages.priority
+
             this.trafficMessages.length = 0
             this.areaZone = this.yourLocation
 
-            // this.dropdownTitle = this.yourLocation
-
             data.messages.forEach((message) => this.trafficMessages.push(message))
-            // console.log(this.trafficMessages)
+
+            this.startToCheckForNewMessages()
         },
         async dropdownAreas() {
             const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
@@ -161,7 +182,7 @@ export default {
             this.trafficMessages.forEach((msg) => filterOnPrio4.push(msg))
             console.log(filterOnPrio4)
 
-            let prioFour = filterOnPrio4.filter(function(prio) {
+            let prioFour = filterOnPrio4.filter(function (prio) {
                 return prio.priority === 4 && prio.priority === 3
             })
             console.log(prioFour)
@@ -169,6 +190,43 @@ export default {
         },
         sortOnMild() {
             return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
+        },
+        async alertFunction() {
+            this.checkArray = []
+
+            let response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${this.dropdownZone}&size=3`)
+            const data = await response.json()
+
+            data.messages.forEach((message) => this.checkArray.push(message))
+
+            let checkNow = this.checkArray
+            let checkThis = this.trafficMessages
+
+            if (checkNow[0].id !== checkThis[0].id) {
+                let subcategory = checkNow[0].subcategory
+                let prio = checkNow[0].priority
+                let title = checkNow[0].title
+                let description = checkNow[0].description
+
+                alert(
+                    "Kategori: " +
+                        subcategory +
+                        ", Prio: " +
+                        prio +
+                        ", Plats: " +
+                        title +
+                        ", Beskrivning: " +
+                        description +
+                        "."
+                )
+                // console.log("Kategori: " + subcategory + ", Prio: " + prio + ", Plats: " + title + ", Beskrivning: " + description + ".")
+            } else {
+                alert("no update")
+                this.modalShow = true
+            }
+        },
+        startToCheckForNewMessages() {
+            setInterval(this.alertFunction, 120000)
         },
     },
 }

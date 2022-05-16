@@ -249,7 +249,7 @@ export default {
             this.dropdownTitle = this.yourLocation
         },
         speak(qna) {
-            if (speechSynthesis.lang === 'sv-SE') {
+            if (speechSynthesis) {
                 let text = qna
                 let utterance = new SpeechSynthesisUtterance(text)
                 utterance.lang = 'sv-SE'
