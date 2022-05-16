@@ -18,12 +18,14 @@
                 härligt gäng UX-designers och JAVA<br />
                 utvecklare från yrkeshögskolan YRGO
             </p>
-
             <p>
                 CAR PLAY 1.0 är en mobile first webbapplication där du kan få<br />
                 trafikinformation och även spela<br />
-                frågespel i form av quiz.<br /><br />
-                Quizet är kopplat till zooner du passerar medan du kör bil. CAR PLAY använder<br />
+                frågespel i form av quiz.
+            </p>
+            <p>
+                Quizet är kopplat till zooner du passerar<br />
+                medan du kör bil. CAR PLAY använder<br />
                 SR Öppna API för att hämta<br />
                 trafikinformation.
             </p>
@@ -61,7 +63,7 @@
         <div class="devider" style="top: 3.5em"></div>
         <div class="project-members">
             <div class="column">
-                <strong>UX - Designers</strong><br />
+                <b>UX - Designers</b><br />
                 Jennifer<br />
                 Teodor<br />
                 Linnea<br />
@@ -71,7 +73,7 @@
                 Angelica
             </div>
             <div class="column">
-                <strong>JAVA - Utvecklare</strong><br />
+                <b>JAVA - Utvecklare</b><br />
                 Marcus<br />
                 Hamodi<br />
                 Oscar<br />
@@ -84,8 +86,8 @@
 
 <style scoped>
 div {
-    background: #f8f8f8;
-    border-radius: 0.5em;
+    background-color: #f8f8f8;
+    border-radius: 0.75em;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -115,6 +117,10 @@ h2 {
         "Helvetica Neue", sans-serif;
     font-style: normal;
     font-weight: 800;
+}
+
+b {
+    font-weight: 700;
 }
 
 .devider {
