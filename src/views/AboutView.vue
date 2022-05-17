@@ -63,7 +63,7 @@
         <div class="devider" style="top: 3.5em"></div>
         <div class="project-members">
             <div class="column">
-                <b>UX - Designers</b><br />
+                <p class="para-bold">UX - Designers</p>
                 Jennifer<br />
                 Teodor<br />
                 Linnea<br />
@@ -73,7 +73,7 @@
                 Angelica
             </div>
             <div class="column">
-                <b>JAVA - Utvecklare</b><br />
+                <p class="para-bold">JAVA - Utvecklare</p>
                 Marcus<br />
                 Hamodi<br />
                 Oscar<br />
