@@ -1,16 +1,16 @@
 <template>
     <div class="container">
-        <div class="div-button">
-            <button>
-                <svg width="15" height="24" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M14.5356 20.7975L5.75731 12L14.5356 3.2025L11.8331 0.5L0.333143 12L11.8331 23.5L14.5356 20.7975Z"
-                        fill="black"
-                    />
-                </svg>
-            </button>
+        <button>
+            <svg width="15" height="24" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M14.5356 20.7975L5.75731 12L14.5356 3.2025L11.8331 0.5L0.333143 12L11.8331 23.5L14.5356 20.7975Z"
+                    fill="black"
+                />
+            </svg>
+        </button>
+        <div id="header">
+            <h2>Vilka är vi?</h2>
         </div>
-        <div id="header"><h2>Vilka är vi?</h2></div>
         <div class="devider"></div>
         <div class="paragraphs">
             <p class="para-bold">
@@ -19,7 +19,8 @@
                 utvecklare från yrkeshögskolan YRGO
             </p>
             <p>
-                CAR PLAY 1.0 är en mobile first webbapplication där du kan få<br />
+                CAR PLAY 1.0 är en mobile first<br />
+                webbapplication där du kan få<br />
                 trafikinformation och även spela<br />
                 frågespel i form av quiz.
             </p>
@@ -54,7 +55,7 @@
                 />
             </svg>
         </div>
-        <div id="bot-para" class="paragraphs" style="text-align: center; top: 3.25em">
+        <div id="bot-para" class="paragraphs">
             <p class="para-bold">
                 Det härliga gänget som står<br />
                 bakom CAR PLAY är;
@@ -91,24 +92,30 @@ div {
     display: flex;
     flex-direction: column;
     height: 100%;
-    right: 0em;
+    left: 0;
+    margin: 0;
+    margin: auto;
+    padding: 0;
     position: relative;
     top: 1em;
-    width: 93%;
+    width: 92%;
 }
 
-div button {
+button {
     border-radius: 2em;
     box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
     background-color: #93b5c6;
     border: none;
     height: 2.875em;
+    margin-left: 1.5em;
+    margin-top: 1.5em;
     width: 2.875em;
 }
 
 #header {
+    left: 0;
     text-align: center;
-    top: 1.4em;
+    top: 0.5em;
     width: 100%;
 }
 
@@ -116,36 +123,35 @@ h2 {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
         "Helvetica Neue", sans-serif;
     font-style: normal;
-    font-weight: 800;
-}
-
-b {
     font-weight: 700;
+    font-size: 200%;
 }
 
 .devider {
     border: 0.001em solid #93b5c6;
-    width: 100%;
-    left: 0em;
-    top: 2em;
+    width: 92%;
 }
 
 .paragraphs {
-    left: 0em;
-    top: 3em;
-    width: 100%;
+    margin-top: 1em;
+    margin-left: 1.5em;
 }
 
 .para-bold {
-    font-size: 1em;
     font-weight: 700;
+}
+
+#bot-para {
+    margin-left: 0;
+    text-align: center;
+    top: 2.5em;
+    width: 100%;
 }
 
 #group-pic {
     align-items: center;
-    height: 10em;
+    left: 0;
     width: 100%;
-    top: 3.25em;
 }
 
 #pic1 {
@@ -163,31 +169,28 @@ b {
     margin-left: 3.5em;
 }
 
-/* Not affected by the global (current view) div css, why? */
 .project-members {
     flex-direction: row;
     text-align: center;
-    top: -1em;
     margin-top: 5em;
+    margin-bottom: 4.2em;
     width: 100%;
-    left: -0.3em;
-    padding-bottom: 4em;
 }
 
 .column {
     flex: 50%;
-    top: 0em;
+    top: 0;
+    margin-top: 0;
 }
 
 #space-before-footer {
     margin-top: 2em;
 }
 
-@media screen and (min-width: 1440px) {
-    div button,
+@media screen and (min-width: 1400px) {
+    button,
     #bot-para,
-    .devider,
-    .div-button {
+    .devider {
         display: none;
     }
 
@@ -195,27 +198,26 @@ b {
         box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
     }
 
-    /* Duplicate <box-shadow: none;> below which needs to be looked into. Reguires adjustments in main sections. */
     #header {
         box-shadow: none;
         text-align: left;
-        margin-top: 5.5em;
-        margin-left: 5em;
+        margin-top: 10em;
+        margin-left: 15em;
         width: 50%;
     }
 
     .paragraphs {
         box-shadow: none;
-        margin-left: 5em;
+        margin-left: 15em;
+        padding-bottom: 21em;
         width: 50%;
     }
 
     #group-pic {
         box-shadow: none;
-        top: -25em;
-        left: 42.5em;
-        height: 100%;
-        width: 35%;
+        margin-top: -63%;
+        left: 15em;
+        width: 28%;
     }
 
     #pic1,
@@ -226,13 +228,14 @@ b {
 
     .project-members {
         box-shadow: none;
-        width: 25%;
-        top: -25em;
-        left: 46em;
+        width: 28%;
+        left: 17.5em;
+        text-align: left;
     }
 
     .column {
         box-shadow: none;
+        padding-bottom: 18em;
     }
 }
 </style>
