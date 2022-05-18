@@ -49,11 +49,11 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
-                <li><a class="dropdown-item" @click="sortOnMedium">Medel påvärkan</a></li>
-                <!-- <li><hr class="dropdown-divider"></li> -->
-                <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
+                <li><a class="dropdown-item" @click="sortOnDisturbance">Störningar</a></li>
+                <!-- <li><hr class="dropdown-divider"></li> -->
+                <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
             </ul>
@@ -145,7 +145,7 @@ export default {
             this.getMessages(this.yourLocation)
         },
         async getMessages(areaName) {
-            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=3`)
+            const response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${areaName}&size=15`)
             this.dropdownZone = areaName
             const data = await response.json()
 
@@ -157,7 +157,7 @@ export default {
             this.startToCheckForNewMessages()
         },
         async dropdownAreas() {
-            const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
+            const response = await fetch(`${AREA_URL}?format=json&pagination=false`)
             if (!response.ok) {
                 throw new Error("Could not load areas")
             }
@@ -177,15 +177,15 @@ export default {
             })
             this.trafficMessages = sortedSeriousList
         },
-        sortOnMedium() {
+        sortOnDisturbance() {
             let filterOnPrio4 = []
             this.trafficMessages.forEach((msg) => filterOnPrio4.push(msg))
-            console.log(filterOnPrio4)
+            console.log("Here" + filterOnPrio4)
 
             let prioFour = filterOnPrio4.filter(function (prio) {
-                return prio.priority === 4 && prio.priority === 3
+                return prio.priority === 3 || prio.priority === 4
             })
-            console.log(prioFour)
+            console.log("Prio4" + prioFour)
             this.trafficMessages = prioFour
         },
         sortOnMild() {
@@ -226,6 +226,7 @@ export default {
             }
         },
         startToCheckForNewMessages() {
+            clearInterval()
             setInterval(this.alertFunction, 120000)
         },
     },
