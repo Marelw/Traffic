@@ -26,7 +26,6 @@
                 </div>
             </div>
         </div>
-        <!-- Example single danger button -->
         <div class="btn-group mx-2">
             <button
                 type="button"
@@ -48,14 +47,11 @@
                 </svg>
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" @click="sortOnSerious">Prioritet</a></li>
+                <li><a class="dropdown-item" @click="sortOnSerious">Sorterad Prioritet</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
                 <li><a class="dropdown-item" @click="sortOnDisturbance">Störningar</a></li>
                 <li><a class="dropdown-item" @click="sortOnBigEvents">Stora påverkningar</a></li>
-                <!-- <li><hr class="dropdown-divider"></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
             </ul>
         </div>
     </div>
@@ -74,33 +70,12 @@
             </div>
         </div>
     </div>
-    <!-- <div>
-        <button @click="showModal" ref="btnShow">Open Modal</button>
-        <button @click="toggleModal" ref="btnToggle">Toggle Modal</button>
-
-        <modal id="modal-1">
-            <div class="d-block">Hello From My Modal!</div>
-            <button @click="hideModal">Close Me</button>
-            <button @click="toggleModal">Toggle Me</button>
-        </modal>
-    </div> -->
 </template>
 
 <script>
-// import func from 'vue-editor-bridge'
-let srAreas = undefined
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 export default {
-    //     showModal() {
-    //   this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
-    // },
-    // hideModal() {
-    //   this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
-    // },
-    // toggleModal() {
-    //   this.$root.$emit('bv::toggle::modal', 'modal-1', '#btnToggle')
-    // },
     data() {
         return {
             checkArray: [],
@@ -112,6 +87,7 @@ export default {
             dropdownTitle: "Örebro",
             dropdownZone: "",
             modalShow: false,
+            myInterval: setInterval(this.alertFunction, 120000)
         }
     },
     mounted() {
@@ -154,6 +130,7 @@ export default {
 
             data.messages.forEach((message) => this.trafficMessages.push(message))
 
+            clearInterval(this.myInterval)
             this.startToCheckForNewMessages()
         },
         async dropdownAreas() {
@@ -216,6 +193,7 @@ export default {
             let checkThis = this.trafficMessages
 
             if (checkNow[0].id !== checkThis[0].id) {
+                this.getMessages(this.dropdownZone)
                 let subcategory = checkNow[0].subcategory
                 let prio = checkNow[0].priority
                 let title = checkNow[0].title
@@ -232,15 +210,10 @@ export default {
                         description +
                         "."
                 )
-                // console.log("Kategori: " + subcategory + ", Prio: " + prio + ", Plats: " + title + ", Beskrivning: " + description + ".")
-            } else {
-                alert("no update")
-                this.modalShow = true
-            }
+            } 
         },
         startToCheckForNewMessages() {
-            clearInterval()
-            setInterval(this.alertFunction, 120000)
+            this.myInterval = setInterval(this.alertFunction, 120000)
         },
     },
 }
