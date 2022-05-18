@@ -52,8 +52,8 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
                 <li><a class="dropdown-item" @click="sortOnDisturbance">Störningar</a></li>
-                <!-- <li><hr class="dropdown-divider"></li> -->
-                <!-- <li><a class="dropdown-item" @click="sortOnMedium">Medel påverkan</a></li>
+                <li><a class="dropdown-item" @click="sortOnBigEvents">Stora påverkningar</a></li>
+                <!-- <li><hr class="dropdown-divider"></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" @click="sortOnCategory">Vägarbete</a></li> -->
             </ul>
@@ -180,16 +180,29 @@ export default {
         sortOnDisturbance() {
             let filterOnPrio4 = []
             this.trafficMessages.forEach((msg) => filterOnPrio4.push(msg))
-            console.log("Here" + filterOnPrio4)
 
             let prioFour = filterOnPrio4.filter(function (prio) {
                 return prio.priority === 3 || prio.priority === 4
             })
-            console.log("Prio4" + prioFour)
             this.trafficMessages = prioFour
         },
+        sortOnBigEvents() {
+            let filterOnBigPrio = []
+            this.trafficMessages.forEach((msg) => filterOnBigPrio.push(msg))
+
+            let BigPrio = filterOnBigPrio.filter(function (prio) {
+                return prio.priority === 1 || prio.priority === 2
+            })
+            this.trafficMessages = BigPrio
+        },
         sortOnMild() {
-            return this.trafficMessages.filter(message.priority >= 0 && message.priority < 3)
+            let filterOnSmallPrio = []
+            this.trafficMessages.forEach((msg) => filterOnSmallPrio.push(msg))
+
+            let SmallPrio = filterOnSmallPrio.filter(function (prio) {
+                return prio.priority === 5
+            })
+            this.trafficMessages = SmallPrio
         },
         async alertFunction() {
             this.checkArray = []
