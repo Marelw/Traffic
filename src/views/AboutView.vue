@@ -2,8 +2,8 @@
     <div class="container">
         <div id="header">
             <h2>Vilka är vi?</h2>
+            <span class="border"></span>
         </div>
-        <div class="devider"></div>
         <div class="paragraphs">
             <p class="para-bold">
                 Vi som står bakom <span class="word-color">CAR PLAY</span> är ett<br />
@@ -52,8 +52,8 @@
                 Det härliga gänget som står<br />
                 bakom CAR PLAY är;
             </p>
+            <span class="border"></span>
         </div>
-        <div class="devider" style="top: 3.5em"></div>
         <div class="project-members">
             <div class="column">
                 <p class="para-bold">UX - Designers</p>
@@ -113,9 +113,10 @@ h2 {
     font-size: 200%;
 }
 
-.devider {
-    border: 0.001em solid #93b5c6;
-    width: 92%;
+.border {
+    width: 93%;
+    margin-left: 0.75em;
+    margin-top: 1em;
 }
 
 .paragraphs {
@@ -161,7 +162,7 @@ h2 {
 .project-members {
     flex-direction: row;
     text-align: center;
-    margin-top: 5em;
+    margin-top: 4em;
     margin-bottom: 4.2em;
     width: 100%;
 }
@@ -177,8 +178,7 @@ h2 {
 }
 
 @media screen and (min-width: 1400px) {
-    #bot-para,
-    .devider {
+    #bot-para {
         display: none;
     }
 
