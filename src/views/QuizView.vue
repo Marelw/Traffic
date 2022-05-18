@@ -104,6 +104,8 @@
 </template>
 
 <script>
+import { pauseTracking } from '@vue/reactivity'
+
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 export default {
     data() {
@@ -250,12 +252,27 @@ export default {
         },
         speak(qna) {
             if (speechSynthesis) {
+                if(lang === 'sv-SE'){
                 let text = qna
                 let utterance = new SpeechSynthesisUtterance(text)
                 utterance.lang = 'sv-SE'
                 speechSynthesis.speak(utterance)
+                }
+                else{
+                    alert('lang not found')
+                }
+                //Medans tts är i gång, använd medans den läser upp svaret innan nästa fråga?   
+                // speechSynthesis.speaking
             }
         },
+            while (speechSynthesis.speaking){
+                if(quizecountdown !== 0){
+                quizecountdown.pause();
+                }
+                quizecountdown.resume();
+        }
+            //medans tts inte är igång så ska detta köras. så att medans svaret på föregånde fråga svaras på skall inte frågan läsas upp.
+        
     },
 }
 </script>
