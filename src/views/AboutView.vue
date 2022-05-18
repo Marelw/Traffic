@@ -223,7 +223,7 @@ h2 {
 
     .column {
         box-shadow: none;
-        padding-bottom: 18em;
+        padding-bottom: 23em;
     }
 }
 </style>
