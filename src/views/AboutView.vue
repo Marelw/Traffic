@@ -1,13 +1,5 @@
 <template>
     <div class="container">
-        <button>
-            <svg width="15" height="24" viewBox="0 0 15 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M14.5356 20.7975L5.75731 12L14.5356 3.2025L11.8331 0.5L0.333143 12L11.8331 23.5L14.5356 20.7975Z"
-                    fill="black"
-                />
-            </svg>
-        </button>
         <div id="header">
             <h2>Vilka är vi?</h2>
         </div>
@@ -101,20 +93,10 @@ div {
     width: 92%;
 }
 
-button {
-    border-radius: 2em;
-    box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
-    background-color: #93b5c6;
-    border: none;
-    height: 2.875em;
-    margin-left: 1.5em;
-    margin-top: 1.5em;
-    width: 2.875em;
-}
-
 #header {
     left: 0;
     text-align: center;
+    margin-top: 2em;
     top: 0.5em;
     width: 100%;
 }
@@ -188,7 +170,6 @@ h2 {
 }
 
 @media screen and (min-width: 1400px) {
-    button,
     #bot-para,
     .devider {
         display: none;
