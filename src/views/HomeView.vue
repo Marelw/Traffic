@@ -81,20 +81,24 @@
             <div class="project-members">
                 <div class="column">
                     <p class="para-bold">UX - Designers</p>
-                    Jennifer<br />
-                    Teodor<br />
-                    Linnea<br />
-                    Mathilda<br />
-                    Pernilla<br />
-                    Oscar<br />
-                    Angelica
+                    <span class="word-color"
+                        >Jennifer<br />
+                        Teodor<br />
+                        Linnea<br />
+                        Mathilda<br />
+                        Pernilla<br />
+                        Oscar<br />
+                        Angelica</span
+                    >
                 </div>
                 <div class="column">
                     <p class="para-bold">JAVA - Utvecklare</p>
-                    Marcus<br />
-                    Hamodi<br />
-                    Oscar<br />
-                    Patrick
+                    <span class="word-color"
+                        >Marcus<br />
+                        Hamodi<br />
+                        Oscar<br />
+                        Patrick</span
+                    >
                 </div>
             </div>
         </div>
