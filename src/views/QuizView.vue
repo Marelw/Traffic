@@ -32,11 +32,7 @@
                     {{ countDownTime }} sec
                 </p>
                 <div v-if="quizRunning">
-                    <!-- <p>
-                        <span v-if="answerVisible">Nästa fråga ges om:</span>
-                        <span v-if="!answerVisible">Svar visas om:</span>
-                        {{ countDownTime }} sec
-                    </p> -->
+                    
                     <p>
                         <span v-for="(q, i) in currentQuiz">
                             <span v-if="i < currentQuestion">
@@ -88,11 +84,7 @@
                     </p>
                 </div>
             </div>
-            <!-- <div class="card-body" v-if="!quizRunning" -->
-            <!-- <div class="card-body" v-if="quizRunning"> -->
-            <!-- <div class="card-body">Välj "Start" för att påbörja Quiz!</div> -->
             <div class="card-body mx-4 my-4 bg-light" style="">
-                <!-- <h6 class="card-body">Välj "Start" för att påbörja Quiz!</h6> -->
                 <h5 class="card-title">Fråga</h5>
                 <p class="card-text">{{ quizQuestion }}</p>
                 <h6 class="card-title">Svar:</h6>
@@ -104,6 +96,8 @@
 </template>
 
 <script>
+import { pauseTracking } from '@vue/reactivity'
+
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 export default {
     data() {
@@ -112,16 +106,19 @@ export default {
             gbgQuizArray: [
                 { question: "Hur många heter Glenn i Göteborg?", answer: "454 personer heter Glenn i Göteborg" },
                 { question: 'Vad översätter ordet "bamba" till?', answer: "Skolmatsal" },
-                {
-                    question:
-                        'Göteborg liknas ibland vid en annan europeisk storstad med ett "lilla" framför. Vilken storstad?',
-                    answer: "London",
-                },
+                { question: 'Göteborg liknas ibland vid en annan europeisk storstad med ett "lilla" framför. Vilken storstad?',
+                    answer: "London" },
+                { question: "Hur många allsvenska mästerskap har IFK Göteborg vunnit?", answer: "13"},
+                { question: "Vilken fisk kallas fotbollslaget Gais för?", answer: "Makrillarna"},
+                { question: "På vilken Ö växte trubaduren Evert Taube upp på?", answer: "Vingö"}
             ],
             orebroQuizArray: [
-                { question: "örebro?", answer: "....dasdas" },
-                { question: "sahdaskd?", answer: "asdfasdf" },
-                { question: "asdfasdfasdfasdfasd?", answer: ",mölöl," },
+                { question: "Vad heter vattentornet i Örebro?", answer: "Svampen" },
+                { question: "Vilken arkitekt ritade det nya kulturhuset i Örebro?", answer: "Gert Wingårdh" },
+                { question: "Vad heter fotbollsarenan där Örebro SK spelar sina fotbollsmatcher?", answer: "Behrn Arena" },
+                { question: "På vilken plats över Sveriges största städer är Örebro på? ", answer: "7:e plats" },
+                { question: "I vilket landskap ligger Örebro?", answer: "Närke" },
+                
             ],
             trafficZones: [],
             yourLocation: "",
@@ -130,7 +127,7 @@ export default {
             quizAnswer: "",
 
             currentQuestion: 0,
-            countDownTime: 10,
+            countDownTime: 120,
             timer: null,
             quizRunning: false,
             answerVisible: false,
@@ -169,17 +166,18 @@ export default {
             this.quizRunning = false
         },
         showAnswer() {
-            this.countDownTime = 2
+            this.countDownTime = 120
             this.answerVisible = true
             this.countDownAnswer()
         },
         async nextQuestion() {
             clearTimeout(this.timer)
             let nextQuestion = this.currentQuestion + 1
+
             this.answerVisible = false
             if (nextQuestion < this.currentQuiz.length) {
                 this.currentQuestion = nextQuestion
-                this.countDownTime = 2
+                this.countDownTime = 120
                 this.quizQuestion = this.currentQuiz[nextQuestion].question
                 this.speak(this.quizQuestion)
                 this.quizAnswer = this.currentQuiz[nextQuestion].answer
@@ -202,9 +200,9 @@ export default {
                 this.currentQuestion = -1
 
                 this.nextQuestion()
-                console.log("Frågor för Örebro kommer inom kort...")
             } else {
-                console.log("Detta område stöds ej ännu. Donera till CarPlay på Swish: 0720468084")
+                this.quizQuestion = "Omådet stöds ej!! Donera till CarPlay på Swish: 0720579094"
+
             }
         },
         endQuiz() {
@@ -231,7 +229,7 @@ export default {
             }
         },
         async dropdownAreas() {
-            const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
+            const response = await fetch(`${AREA_URL}?format=json&pagination=false`)
             if (!response.ok) {
                 throw new Error("Could not load areas")
             }
@@ -250,12 +248,17 @@ export default {
         },
         speak(qna) {
             if (speechSynthesis) {
+                if(lang === 'sv-SE'){
                 let text = qna
                 let utterance = new SpeechSynthesisUtterance(text)
                 utterance.lang = 'sv-SE'
                 speechSynthesis.speak(utterance)
+                }
+                else{
+                    alert('lang not found')
+                }
             }
-        },
+        }   
     },
 }
 </script>
