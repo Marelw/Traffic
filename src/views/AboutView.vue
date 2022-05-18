@@ -6,7 +6,7 @@
         <div class="devider"></div>
         <div class="paragraphs">
             <p class="para-bold">
-                Vi som står bakom CAR PLAY är ett<br />
+                Vi som står bakom <span class="word-color">CAR PLAY</span> är ett<br />
                 härligt gäng UX-designers och JAVA<br />
                 utvecklare från yrkeshögskolan YRGO
             </p>
@@ -57,20 +57,24 @@
         <div class="project-members">
             <div class="column">
                 <p class="para-bold">UX - Designers</p>
-                Jennifer<br />
-                Teodor<br />
-                Linnea<br />
-                Mathilda<br />
-                Pernilla<br />
-                Oscar<br />
-                Angelica
+                <span class="word-color"
+                    >Jennifer<br />
+                    Teodor<br />
+                    Linnea<br />
+                    Mathilda<br />
+                    Pernilla<br />
+                    Oscar<br />
+                    Angelica</span
+                >
             </div>
             <div class="column">
                 <p class="para-bold">JAVA - Utvecklare</p>
-                Marcus<br />
-                Hamodi<br />
-                Oscar<br />
-                Patrick
+                <span class="word-color"
+                    >Marcus<br />
+                    Hamodi<br />
+                    Oscar<br />
+                    Patrick</span
+                >
             </div>
         </div>
     </div>
@@ -121,6 +125,9 @@ h2 {
 
 .para-bold {
     font-weight: 700;
+}
+.word-color {
+    color: #93b5c6;
 }
 
 #bot-para {
