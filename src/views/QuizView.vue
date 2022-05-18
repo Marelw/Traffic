@@ -261,18 +261,8 @@ export default {
                 else{
                     alert('lang not found')
                 }
-                //Medans tts är i gång, använd medans den läser upp svaret innan nästa fråga?   
-                // speechSynthesis.speaking
             }
-        },
-            while (speechSynthesis.speaking){
-                if(quizecountdown !== 0){
-                quizecountdown.pause();
-                }
-                quizecountdown.resume();
-        }
-            //medans tts inte är igång så ska detta köras. så att medans svaret på föregånde fråga svaras på skall inte frågan läsas upp.
-        
+        }   
     },
 }
 </script>
