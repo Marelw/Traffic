@@ -178,7 +178,8 @@ h2 {
 }
 
 @media screen and (min-width: 1400px) {
-    #bot-para {
+    #bot-para,
+    .border {
         display: none;
     }
 
