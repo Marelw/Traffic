@@ -41,7 +41,7 @@
                 <h2>
                     Vi som står bakom <span class="word-color">CAR PLAY</span> är ett<br />
                     härligt gäng UX-designers och JAVA<br />
-                    utveklare från yrkeshögskolan YRGO
+                    utvecklare från yrkeshögskolan YRGO
                 </h2>
                 <p>
                     CAR PLAY 1.0 är en mobile first webbapplication där du kan få<br />
