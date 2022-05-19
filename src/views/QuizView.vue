@@ -62,7 +62,7 @@
                 <p class="card-text">{{ quizQuestion }}</p>
                 <h6 class="card-title">Svar:</h6>
                 <p class="card-title" v-if="answerVisible">{{ quizAnswer }}</p>
-                <button class="btn btn-secondary mx-2" type="button" style="width: 30%">spela upp igen</button>
+                <button class="btn btn-secondary btn-sm mx-2" type="button" style="width: 30%" @click="speak(this.quizQuestion)">spela upp igen</button>
             </div>
         </div>
     </div>

@@ -84,7 +84,7 @@
                     <span class="word-color"
                         >Jennifer<br />
                         Teodor<br />
-                        Linnea<br />
+                        Linnéa<br />
                         Mathilda<br />
                         Pernilla<br />
                         Oscar<br />
