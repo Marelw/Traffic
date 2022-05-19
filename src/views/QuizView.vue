@@ -143,6 +143,7 @@ export default {
         showAnswer() {
             this.countDownTime = 120
             this.answerVisible = true
+            this.speak(this.quizAnswer)
             this.countDownAnswer()
         },
         async nextQuestion() {
@@ -156,6 +157,7 @@ export default {
                 this.quizQuestion = this.currentQuiz[nextQuestion].question
                 this.speak(this.quizQuestion)
                 this.quizAnswer = this.currentQuiz[nextQuestion].answer
+                
                 this.countDownQuestion()
             } else {
                 this.finishQuiz()
