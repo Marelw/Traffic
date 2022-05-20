@@ -83,9 +83,9 @@ export default {
                     question: 'Göteborg liknas ibland vid en annan europeisk storstad med ett "lilla" framför. Vilken storstad?',
                     answer: "London"
                 },
-                { question: "Hur många allsvenska mästerskap har IFK Göteborg vunnit?", answer: "13" },
+                { question: "Hur många allsvenska mästerskap har IFK Göteborg vunnit?", answer: "18" },
                 { question: "Vilken fisk kallas fotbollslaget Gais för?", answer: "Makrillarna" },
-                { question: "På vilken Ö växte trubaduren Evert Taube upp på?", answer: "Vingö" }
+                { question: "På vilken Ö växte trubaduren Evert Taube upp på?", answer: "Vinga" }
             ],
             orebroQuizArray: [
                 { question: "Vad heter vattentornet i Örebro?", answer: "Svampen" },
@@ -231,6 +231,7 @@ export default {
                 if (lang === 'sv-SE') {
                     message.lang = 'sv-SE'
                     speechSynthesis.speak(message)
+                    speechSynthesis.pause()
                 }
                 else {
                     alert('Text till tal språket stödjs ej.')
