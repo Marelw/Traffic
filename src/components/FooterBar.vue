@@ -38,4 +38,15 @@ a {
     font-weight: 650;
     font-size: 1em;
 }
+
+@media screen and (min-width: 1400px) {
+    .container {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+
+    .container div {
+        margin-top: 0.25em;
+    }
+}
 </style>
