@@ -20,9 +20,9 @@
                 </svg>
                 {{ dropdownTitle }}
             </button>
-            <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto">
+            <div class="dropdown-menu">
                 <div v-for="area in trafficZones">
-                    <a class="dropdown-item" @click="chooseZone">{{ area.name }} </a>
+                    <a class="dropdown-item" @click="chooseZone">{{ area.name }}</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
             </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" @click="sortOnSerious">Sorterad Prioritet</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" @click="sortOnMild">Mild påverkan</a></li>
                 <li><a class="dropdown-item" @click="sortOnDisturbance">Störningar</a></li>
                 <li><a class="dropdown-item" @click="sortOnBigEvents">Stora påverkningar</a></li>
@@ -58,15 +58,11 @@
     <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
 
     <div class="container">
-        <div
-            class="card mx-auto mb-3 border border-2 border-dark rounded"
-            style="width: 18rem"
-            v-for="msg in trafficMessages"
-        >
+        <div class="card mx-auto mb-3" v-for="msg in trafficMessages">
             <div class="card-body">
-                <h5 class="card-title">{{ "Kategori: " + msg.subcategory + " Prio: " + msg.priority }}</h5>
+                <h5 class="card-title">{{ msg.subcategory }}</h5>
                 <h6 class="card-title2">{{ "Plats: " + msg.title }}</h6>
-                <p class="card-text">{{ "Beskrivning: " + msg.description }}</p>
+                <p class="card-text">{{ msg.description }}</p>
             </div>
         </div>
     </div>
@@ -87,7 +83,7 @@ export default {
             dropdownTitle: "Örebro",
             dropdownZone: "",
             modalShow: false,
-            myInterval: setInterval(this.alertFunction, 120000)
+            myInterval: setInterval(this.alertFunction, 120000),
         }
     },
     mounted() {
@@ -210,7 +206,7 @@ export default {
                         description +
                         "."
                 )
-            } 
+            }
         },
         startToCheckForNewMessages() {
             this.myInterval = setInterval(this.alertFunction, 120000)
@@ -218,3 +214,21 @@ export default {
     },
 }
 </script>
+<style scoped>
+.card {
+    border-radius: 0.75em;
+    border: 1px solid black;
+    height: 12.25em;
+    width: 21.4em;
+    overflow: auto;
+    background-color: #f8f8f8;
+}
+
+@media screen and (min-width: 1400px) {
+    .card {
+        border: none;
+        box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+        width: 75%;
+    }
+}
+</style>
