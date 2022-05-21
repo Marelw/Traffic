@@ -35,6 +35,7 @@ a {
 }
 
 #footer-header {
-    font-weight: 700;
+    font-weight: 650;
+    font-size: 1em;
 }
 </style>
