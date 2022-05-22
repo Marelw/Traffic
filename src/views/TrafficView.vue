@@ -80,7 +80,7 @@
     </div>
     <p v-if="statusMessage !== ''">{{ statusMessage }}</p>
 
-    <div class="container">
+    <div class="container d-flex flex-column min-vh-100">
         <div class="card mx-auto mb-3" v-for="msg in trafficMessages">
             <div class="card-body">
                 <h5 class="card-title">{{ msg.subcategory }}</h5>
