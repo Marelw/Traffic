@@ -1,9 +1,9 @@
 <template>
-    <div class="container">
+    <div class="container d-flex flex-column min-vh-100">
         <div id="header">
             <h2>Vilka är vi?</h2>
-            <span class="border"></span>
         </div>
+        <span class="border"></span>
         <div class="paragraphs">
             <p class="para-bold">
                 Vi som står bakom <span class="word-color">CAR PLAY</span> är ett<br />
@@ -52,7 +52,7 @@
                 Det härliga gänget som står<br />
                 bakom CAR PLAY är;
             </p>
-            <span class="border"></span>
+            <span id="rotate-border" class="border"></span>
         </div>
         <div class="project-members">
             <div class="column">
@@ -82,15 +82,9 @@
 </template>
 
 <style scoped>
-div {
+.container {
     background-color: #f8f8f8;
     border-radius: 0.75em;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    left: 0;
-    margin: 0;
-    margin: auto;
     padding: 0;
     position: relative;
     top: 1em;
@@ -103,6 +97,11 @@ div {
     margin-top: 2em;
     top: 0.5em;
     width: 100%;
+}
+
+#rotate-border {
+    display: flex;
+    margin-top: 2em;
 }
 
 h2 {
@@ -120,7 +119,7 @@ h2 {
 }
 
 .paragraphs {
-    margin-top: 1em;
+    margin-top: 1.5em;
     margin-left: 1.5em;
 }
 
@@ -134,35 +133,40 @@ h2 {
 #bot-para {
     margin-left: 0;
     text-align: center;
-    top: 2.5em;
+    margin-top: 9.5em;
     width: 100%;
 }
 
 #group-pic {
-    align-items: center;
-    left: 0;
+    position: relative;
+    margin-left: 8em;
     width: 100%;
+    justify-content: center;
 }
 
 #pic1 {
-    margin-top: 1em;
-    margin-left: -4.5em;
+    position: absolute;
+    margin-top: 0.85em;
+    left: -0.5em;
 }
 
 #pic2 {
-    margin-top: 0.5em;
-    margin-left: -5.5em;
+    position: absolute;
+    margin-top: 4.35em;
+    margin-left: -1.5em;
 }
 
 #pic3 {
-    margin-top: -7.1em;
-    margin-left: 3.5em;
+    position: absolute;
+    margin-top: 0.25em;
+    margin-left: 2em;
 }
 
 .project-members {
+    display: flex;
     flex-direction: row;
     text-align: center;
-    margin-top: 4em;
+    margin-top: 2.5em;
     margin-bottom: 4.2em;
     width: 100%;
 }
@@ -177,7 +181,7 @@ h2 {
     margin-top: 2em;
 }
 
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1440px) {
     #bot-para,
     .border {
         display: none;
@@ -185,46 +189,72 @@ h2 {
 
     div {
         box-shadow: 0em 0.25em 0.25em rgba(0, 0, 0, 0.25);
+        height: 0;
     }
 
     #header {
         box-shadow: none;
         text-align: left;
-        margin-top: 10em;
+        top: 0;
+        left: 0;
         margin-left: 15em;
+        margin-top: 10em;
         width: 50%;
     }
 
     .paragraphs {
         box-shadow: none;
         margin-left: 15em;
-        padding-bottom: 21em;
+        margin-top: 3.5em;
+        top: 0;
+        left: 0;
         width: 50%;
     }
 
     #group-pic {
         box-shadow: none;
-        margin-top: -63%;
-        left: 15em;
-        width: 28%;
+        position: relative;
+        top: -5em;
+        left: 0;
+        width: 30%;
+        margin-top: 0;
+        margin-left: 50em;
+        height: 15em;
     }
 
     #pic1,
     #pic2,
     #pic3 {
-        zoom: 1.75;
+        zoom: 2;
+    }
+
+    #pic1 {
+        position: absolute;
+        top: -3em;
+    }
+    #pic2 {
+        position: absolute;
+        top: -3em;
+    }
+    #pic3 {
+        position: absolute;
+        top: -3em;
     }
 
     .project-members {
         box-shadow: none;
         width: 28%;
-        left: 17.5em;
+        margin-top: -7em;
+        margin-left: 47em;
+        left: 0;
         text-align: left;
+        height: 15em;
     }
 
     .column {
+        top: 0;
+        margin: 0;
         box-shadow: none;
-        padding-bottom: 23em;
     }
 }
 </style>
