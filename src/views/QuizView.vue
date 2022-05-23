@@ -10,7 +10,7 @@
                     <button class="btn btn-secondary mx-2" type="button" style="width: 20%" @Click="startQuiz">
                         Starta
                     </button>
-                    <button class="btn btn-secondary mx-2" type="button" style="width: 20%" @Click="endQuiz">
+                    <button class="btn btn-secondary mx-2" type="button" style="width: 25%" @Click="endQuiz">
                         Avsluta
                     </button>
                     <div class="dropdown-menu" style="max-height: 11rem; overflow-y: auto">
