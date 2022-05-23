@@ -1,48 +1,37 @@
 # Traffic
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a simple READme over the webapp on how to run this repo localy on a PC.
+
+To run this you need, Node.js installed on your computor and an IDE.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+[VSCode](https://code.visualstudio.com/)
 
-## Customize configuration
+## Node.js
+[Nodejs](https://nodejs.org/)
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
-## Project Setup
+Other than this, no other packages, keys or logins are required.
+
+
+## To run the webapp
+
+### Start by navigating to the downloaded package and be in the same folder as package.json
+Run the following command in a terminal
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### To test new Features run this command
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+### To compile and run in production
 
 ```sh
 npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run build
-npm run test:e2e # or `npm run test:e2e:ci` for headless testing
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
