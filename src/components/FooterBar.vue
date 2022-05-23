@@ -1,28 +1,52 @@
 <template>
-    <footer class="position-sticky mt-auto py-3 bg-secondary container-fluid" >
-    <div class="container" >
-        <!-- <div><a class="quizView">Quiz</a></div>
-        <div><a class="trafficView">Trafikinfo</a></div>
-        <div><a class="aboutView">Om oss</a></div>
-        <span class="text-muted">Place sticky footer content here.</span> -->
+    <footer class="position-sticky mt-auto py-3 bg-secondary container-fluid">
+        <div class="container">
+            <router-link to="/">
+                <a id="footer-header">
+                    <div>CAR PLAY</div>
+                </a>
+            </router-link>
 
             <router-link to="/trafficview">
-                <a class="trafficView">
-                    <div>Trafikinfo</div>
+                <a>
+                    <div>Trafikinformation</div>
                 </a>
             </router-link>
 
             <router-link to="/quizview">
-                <a class="quizView">
+                <a>
                     <div>Quiz</div>
                 </a>
             </router-link>
 
             <router-link to="/aboutview">
-                <a class="aboutView">
+                <a>
                     <div>Om oss</div>
                 </a>
             </router-link>
-    </div>
-</footer>
+        </div>
+    </footer>
 </template>
+
+<style scoped>
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#footer-header {
+    font-weight: 650;
+    font-size: 1em;
+}
+
+@media screen and (min-width: 1400px) {
+    .container {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+
+    .container div {
+        margin-top: 0.25em;
+    }
+}
+</style>
