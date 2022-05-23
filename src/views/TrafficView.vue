@@ -37,7 +37,7 @@
                     />
                 </svg>
             </button>
-            <div class="dropdown-menu dropdown-menu-end">
+            <div class="dropdown-menu dropdown-menu-end" style="max-height: 11rem; overflow-y: auto">
                 <div v-for="area in trafficZones">
                     <a class="dropdown-item" @click="chooseZone">{{ area.name }}</a>
                 </div>
