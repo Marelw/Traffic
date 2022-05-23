@@ -3,12 +3,12 @@
         <div class="card bg-info">
             <div class="row my-9">
                 <div class="col-md-12 text-center mt-2 mb-9">
-                    <button class="btn btn-secondary dropdown-toggle mx-2" type="button" style="width: 20%"
+                    <button class="btn btn-secondary dropdown-toggle mx-2" type="button" style="width: 30%"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ dropdownTitle }}
                     </button>
                     <button class="btn btn-secondary mx-2" type="button" style="width: 20%" @Click="startQuiz">
-                        Start
+                        Starta
                     </button>
                     <button class="btn btn-secondary mx-2" type="button" style="width: 20%" @Click="endQuiz">
                         Avsluta
