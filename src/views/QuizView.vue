@@ -130,7 +130,7 @@ export default {
             quizAnswer: "",
 
             currentQuestion: 0,
-            countDownTime: 10,
+            countDownTime: 120,
             timer: null,
             quizRunning: false,
             answerVisible: false,
@@ -169,17 +169,18 @@ export default {
             this.quizRunning = false
         },
         showAnswer() {
-            this.countDownTime = 2
+            this.countDownTime = 120
             this.answerVisible = true
             this.countDownAnswer()
         },
         async nextQuestion() {
             clearTimeout(this.timer)
             let nextQuestion = this.currentQuestion + 1
+            
             this.answerVisible = false
             if (nextQuestion < this.currentQuiz.length) {
                 this.currentQuestion = nextQuestion
-                this.countDownTime = 2
+                this.countDownTime = 120
                 this.quizQuestion = this.currentQuiz[nextQuestion].question
                 this.speak(this.quizQuestion)
                 this.quizAnswer = this.currentQuiz[nextQuestion].answer
@@ -204,7 +205,10 @@ export default {
                 this.nextQuestion()
                 console.log("Frågor för Örebro kommer inom kort...")
             } else {
-                console.log("Detta område stöds ej ännu. Donera till CarPlay på Swish: 0720468084")
+                this.quizQuestion = "Omådet stöds ej!! Donera till CarPlay på Swish: 0720579094"
+                this.quizAnswer = ""
+                this.quizRunning = false
+                this.currentQuiz = []
             }
         },
         endQuiz() {
@@ -212,6 +216,8 @@ export default {
             this.quizAnswer = ""
             this.quizRunning = false
             this.currentQuiz = []
+            this.countDownTime = 120
+    
         },
         async locate() {
             const findMe = async (position) => {

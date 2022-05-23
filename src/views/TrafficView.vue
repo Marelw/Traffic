@@ -74,33 +74,29 @@
             </div>
         </div>
     </div>
-    <!-- <div>
-        <button @click="showModal" ref="btnShow">Open Modal</button>
-        <button @click="toggleModal" ref="btnToggle">Toggle Modal</button>
 
-        <modal id="modal-1">
-            <div class="d-block">Hello From My Modal!</div>
-            <button @click="hideModal">Close Me</button>
-            <button @click="toggleModal">Toggle Me</button>
-        </modal>
-    </div> -->
+    <!-- för att testa counterstore -->
+    <!-- <div> {{ counterStore.counter }}</div>
+    <button  @click="counterStore.increment" class="btn-lg"></button>
+    <div>{{ counterStore.doubleCount }}</div> -->
+
+    <modal-comp ref="ModalComp"></modal-comp>
 </template>
 
 <script>
-// import func from 'vue-editor-bridge'
-let srAreas = undefined
+import { useCounterStore } from "@/stores/counter.js"
+import ModalComp from "@/components/ModalComp.vue"
+
 const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
 const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
 export default {
-    //     showModal() {
-    //   this.$root.$emit('bv::show::modal', 'modal-1', '#btnShow')
-    // },
-    // hideModal() {
-    //   this.$root.$emit('bv::hide::modal', 'modal-1', '#btnShow')
-    // },
-    // toggleModal() {
-    //   this.$root.$emit('bv::toggle::modal', 'modal-1', '#btnToggle')
-    // },
+    components: { ModalComp },
+
+    setup() {
+        const counterStore = useCounterStore()
+
+        return { counterStore }
+    },
     data() {
         return {
             checkArray: [],
@@ -112,13 +108,34 @@ export default {
             dropdownTitle: "Örebro",
             dropdownZone: "",
             modalShow: false,
+            myInterval: setInterval(this.alertFunction, 2000),
+            myTimeOut: setTimeout(this.alertFunction, 2000)
         }
     },
     mounted() {
         this.dropdownAreas()
         this.locate()
     },
+    watch: {
+        trafficMessages(checkArray, trafficMessages) {
+            if(trafficMessages[0].id === checkArray[0].id) {
+                this.handleListChange()
+            }
+        }
+    },
+    computed: {
+        getListObject() {
+            return this.counterStore.getList
+        },
+    },
     methods: {
+        handleListChange() {
+            if (this.counterStore.intervalList[0].id === this.counterStore.messageList[0].id) {
+                //show modal
+
+                alert("test")
+            }
+        },
         async locate() {
             const findMe = async (position) => {
                 const latitude = position.coords.latitude
@@ -149,12 +166,20 @@ export default {
             this.dropdownZone = areaName
             const data = await response.json()
 
+            this.counterStore.trafficArea = areaName
+
             this.trafficMessages.length = 0
             this.areaZone = this.yourLocation
 
-            data.messages.forEach((message) => this.trafficMessages.push(message))
-
+            this.counterStore.messageList = []
+            data.messages.forEach((message) => {
+                this.counterStore.addToList(message)
+                this.trafficMessages.push(message)
+            })
+            clearInterval(this.myInterval)
             this.startToCheckForNewMessages()
+            // this.myTimeOut = setTimeout(this.alertFunction, 2000)
+            // this.alertFunction()
         },
         async dropdownAreas() {
             const response = await fetch(`http://api.sr.se/api/v2/traffic/areas?format=json&pagination=false`)
@@ -197,12 +222,18 @@ export default {
             let response = await fetch(`${MESSAGE_URL}?format=json&trafficareaname=${this.dropdownZone}&size=3`)
             const data = await response.json()
 
-            data.messages.forEach((message) => this.checkArray.push(message))
-
+            this.counterStore.intervalList = []
+            // data.messages.forEach((message) => this.counterStore.addToIntervalList(message))
+             data.messages.forEach((message) => this.checkArray.push(message))
+            
+            if(typeof interval !== 'undefined') clearInterval(interval)
+            // this.$refs.ModalComp.checkIfWeCouldShowModal()
             let checkNow = this.checkArray
             let checkThis = this.trafficMessages
+     
 
-            if (checkNow[0].id !== checkThis[0].id) {
+            if (checkNow[0].id === checkThis[0].id) {
+                
                 let subcategory = checkNow[0].subcategory
                 let prio = checkNow[0].priority
                 let title = checkNow[0].title
@@ -224,9 +255,12 @@ export default {
                 alert("no update")
                 this.modalShow = true
             }
+            // myTimeOut(this.alertFunction, 2000)
         },
         startToCheckForNewMessages() {
-            setInterval(this.alertFunction, 120000)
+            this.myInterval = setInterval(this.alertFunction, 2000)
+            // this.myTimeOut = setTimeout(this.alertFunction, 2000)
+            
         },
     },
 }
