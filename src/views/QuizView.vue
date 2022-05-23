@@ -1,9 +1,9 @@
 <template>
     <div class="container col-md-12 text-center mt-2 mb-3">
         <div class="card bg-info">
-            <div class="row my-9">
+            <div class="row my-9" style="height: 12rem ">
                 <div class="col-md-12 text-center mt-2 mb-9">
-                    <button class="btn btn-secondary dropdown-toggle mx-2" type="button" style="width: 30%"
+                    <button class="btn btn-secondary dropdown-toggle mx-2" type="button" style="width: 35%"
                         id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         {{ dropdownTitle }}
                     </button>
@@ -57,7 +57,7 @@
                     </p>
                 </div>
             </div>
-            <div class="card-body mx-4 my-4 bg-light" style="">
+            <div class="card-body mx-4 my-4 bg-light" style="height: 14rem ">
                 <h5 class="card-title">Fråga</h5>
                 <p class="card-text">{{ quizQuestion }}</p>
                 <h6 class="card-title">Svar:</h6>
