@@ -178,8 +178,10 @@ export default {
 
                 this.nextQuestion()
             } else {
-                this.quizQuestion = "Omådet stöds ej!! Donera till CarPlay på Swish: 0720579094"
-
+                this.quizQuestion = this.dropdownTitle + " stöds ej!! Donera till CarPlay"
+                this.quizAnswer = ""
+                this.quizRunning = false
+                this.currentQuiz = []
             }
         },
         endQuiz() {
