@@ -71,7 +71,7 @@
 <script>
 import { pauseTracking } from '@vue/reactivity'
 
-const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
+const AREA_URL = "https://api.sr.se/api/v2/traffic/areas"
 export default {
     data() {
         return {

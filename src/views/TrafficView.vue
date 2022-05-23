@@ -92,8 +92,8 @@
 </template>
 
 <script>
-const MESSAGE_URL = "http://api.sr.se/api/v2/traffic/messages"
-const AREA_URL = "http://api.sr.se/api/v2/traffic/areas"
+const MESSAGE_URL = "https://api.sr.se/api/v2/traffic/messages"
+const AREA_URL = "https://api.sr.se/api/v2/traffic/areas"
 export default {
     data() {
         return {
